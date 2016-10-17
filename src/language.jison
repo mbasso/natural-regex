@@ -112,11 +112,11 @@ e
     | e OR e
         { $$ = "(" + $1 + "|" + $3 + ")"; }
     | e FOLLOWED_BY e
-        { $$ = $1 + "(?=" + $3 + ")"; }
+        { $$ = "(" + $1 + ")" + "(?=" + $3 + ")"; }
     | e NOT_FOLLOWED_BY e
-        { $$ = $1 + "(?!" + $3 + ")"; }
+        { $$ = "(" + $1 + ")" + "(?!" + $3 + ")"; }
     | e repetition
-        { $$ = $1 + $2; }
+        { $$ = "(" + $1 + ")" + $2; }
     | SENTENCE
         %{
             var replaceCharacters = function(input){

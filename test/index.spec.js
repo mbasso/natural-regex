@@ -224,31 +224,31 @@ describe('natural-regex', () => {
     it('optional more times', () => {
       expect(
         NaturalRegex.from('alphanumeric optional more times').toString()
-      ).toEqual('/\\w*/');
+      ).toEqual('/(\\w)*/');
     });
 
     it('required one or more times', () => {
       expect(
         NaturalRegex.from('alphanumeric required one or more times').toString()
-      ).toEqual('/\\w+/');
+      ).toEqual('/(\\w)+/');
     });
 
     it('optional one time', () => {
       expect(
         NaturalRegex.from('alphanumeric optional one time').toString()
-      ).toEqual('/\\w?/');
+      ).toEqual('/(\\w)?/');
     });
 
     it('from to times', () => {
       expect(
         NaturalRegex.from('alphanumeric from 1 to 7 times').toString()
-      ).toEqual('/\\w{1,7}/');
+      ).toEqual('/(\\w){1,7}/');
     });
 
     it('for 7 times', () => {
       expect(
         NaturalRegex.from('alphanumeric for 7 times').toString()
-      ).toEqual('/\\w{7}/');
+      ).toEqual('/(\\w){7}/');
     });
   });
 
@@ -262,13 +262,13 @@ describe('natural-regex', () => {
     it('followed by', () => {
       expect(
         NaturalRegex.from('alphanumeric followed by digit').toString()
-      ).toEqual('/\\w(?=\\d)/');
+      ).toEqual('/(\\w)(?=\\d)/');
     });
 
     it('not followed by', () => {
       expect(
         NaturalRegex.from('alphanumeric not followed by digit').toString()
-      ).toEqual('/\\w(?!\\d)/');
+      ).toEqual('/(\\w)(?!\\d)/');
     });
 
     it('range', () => {
