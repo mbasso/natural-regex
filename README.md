@@ -27,7 +27,7 @@ If you aren't using npm in your project, you can include `NaturalRegex` using UM
 
 ## Usage
 
-Once you have installed natural-regex, supposing a CommonJS environment, you can import decorators in this way and immediately use them with no configuration.
+Once you have installed natural-regex, supposing a CommonJS environment, you can import and immediately use it:
 
 ```js
 import NaturalRegex from 'natural-regex';
