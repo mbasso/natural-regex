@@ -38,7 +38,7 @@ LoremFooOrBar.test('Lorem text'); // this evaluates false
 
 ## Documentation
 
-Visit [Wiki](https://github.com/mbasso/natural-regex/wiki) for the full documentation.
+Visit the [Wiki](https://github.com/mbasso/natural-regex/wiki) for the full documentation.
 
 ## Change Log
 
