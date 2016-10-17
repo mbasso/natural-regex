@@ -10,8 +10,7 @@
 
 ---
 
-**Attention - This project isn't completed yet. There might be breaking changes until version 1.0.0.
-Feel free to contribute, see [TODO](https://github.com/mbasso/natural-regex/blob/master/TODO.md) to get started.**
+**Attention - This project isn't completed yet. There might be breaking changes until version 1.0.0. Feel free to contribute, see [TODO](https://github.com/mbasso/natural-regex/blob/master/TODO.md) to get started.**
 ---
 
 ---
