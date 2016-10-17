@@ -288,4 +288,186 @@ describe('natural-regex', () => {
       ).toEqual('/.*/');
     });
   });
+
+  describe('Characters', () => {
+    it('comma', () => {
+      const compiled = '/\\,/';
+      expect(
+        NaturalRegex.from(',').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('comma').toString()
+      ).toEqual(compiled);
+    });
+
+    it('point', () => {
+      const compiled = '/\\./';
+      expect(
+        NaturalRegex.from('.').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('point').toString()
+      ).toEqual(compiled);
+    });
+
+    it('plus', () => {
+      const compiled = '/\\+/';
+      expect(
+        NaturalRegex.from('+').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('plus').toString()
+      ).toEqual(compiled);
+    });
+
+    it('asterisk', () => {
+      const compiled = '/\\*/';
+      expect(
+        NaturalRegex.from('*').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('asterisk').toString()
+      ).toEqual(compiled);
+    });
+
+    it('question mark', () => {
+      const compiled = '/\\?/';
+      expect(
+        NaturalRegex.from('?').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('question mark').toString()
+      ).toEqual(compiled);
+    });
+
+    it('quotation mark', () => {
+      const compiled = '/\\"/';
+      expect(
+        NaturalRegex.from('"').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('quotation mark').toString()
+      ).toEqual(compiled);
+    });
+
+    it('pipe', () => {
+      const compiled = '/\\|/';
+      expect(
+        NaturalRegex.from('|').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('pipe').toString()
+      ).toEqual(compiled);
+    });
+
+    it('dollar', () => {
+      const compiled = '/\\$/';
+      expect(
+        NaturalRegex.from('$').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('dollar').toString()
+      ).toEqual(compiled);
+    });
+
+    it('colon', () => {
+      const compiled = '/\\:/';
+      expect(
+        NaturalRegex.from(':').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('colon').toString()
+      ).toEqual(compiled);
+    });
+
+    it('exclamation mark', () => {
+      const compiled = '/\\!/';
+      expect(
+        NaturalRegex.from('!').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('exclamation mark').toString()
+      ).toEqual(compiled);
+    });
+
+    it('right square bracket', () => {
+      const compiled = '/\\]/';
+      expect(
+        NaturalRegex.from(']').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('right square bracket').toString()
+      ).toEqual(compiled);
+    });
+
+    it('left square bracket', () => {
+      const compiled = '/\\[/';
+      expect(
+        NaturalRegex.from('[').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('left square bracket').toString()
+      ).toEqual(compiled);
+    });
+
+    it('right curly bracket', () => {
+      const compiled = '/\\}/';
+      expect(
+        NaturalRegex.from('}').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('right curly bracket').toString()
+      ).toEqual(compiled);
+    });
+
+    it('left curly bracket', () => {
+      const compiled = '/\\{/';
+      expect(
+        NaturalRegex.from('{').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('left curly bracket').toString()
+      ).toEqual(compiled);
+    });
+
+    it('right round bracket', () => {
+      const compiled = '/\\)/';
+      expect(
+        NaturalRegex.from(')').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('right round bracket').toString()
+      ).toEqual(compiled);
+    });
+
+    it('left round bracket', () => {
+      const compiled = '/\\(/';
+      expect(
+        NaturalRegex.from('(').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('left round bracket').toString()
+      ).toEqual(compiled);
+    });
+
+    it('caret', () => {
+      const compiled = '/\\^/';
+      expect(
+        NaturalRegex.from('^').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('caret').toString()
+      ).toEqual(compiled);
+    });
+
+    it('backslash', () => {
+      const compiled = '/\\\\/';
+      expect(
+        NaturalRegex.from('\\').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('backslash').toString()
+      ).toEqual(compiled);
+    });
+  });
 });

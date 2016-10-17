@@ -46,29 +46,29 @@ non\s(digit|number)         return 'NON_DIGIT'
 "or"                        return 'OR'
 "and"                       return 'AND'
 "for"                       return 'FOR'
-","                         return ',' // comma
-"."                         return '.' // point
+(\,|comma)                  return ','
+(\.|point)                  return '.'
 
-"^"                         return '^'
-"+"                         return '+' // plus
-"*"                         return '*' // asterisk
-"?"                         return '?' // question mark
-"("                         return '(' // left round bracket
-")"                         return ')' // right round bracket
-"{"                         return '{' // left curly bracket
-"}"                         return '}' // right curly bracket
-"["                         return '[' // left square bracket
-"]"                         return ']' // right square bracket
-":"                         return ':' // colon
-"!"                         return '!' // exclamation point
-"$"                         return '$' // dollar
-"|"                         return '|' // pipe
-"\\"                        return 'BACKSLASH'
+(\^|caret)                  return '^'
+(\+|plus)                   return '+'
+(\*|asterisk)               return '*'
+(\?|question\smark)         return '?'
+(\(|left\sround\sbracket)    return '('
+(\)|right\sround\sbracket)   return ')'
+(\{|left\scurly\sbracket)   return '{'
+(\}|right\scurly\sbracket)  return '}'
+(\[|left\ssquare\sbracket)  return '['
+(\]|right\ssquare\sbracket) return ']'
+(\:|colon)                  return ':'
+(\!|exclamation\smark)      return '!'
+(\$|dollar)                 return '$'
+(\||pipe)                   return '|'
+(\\|backslash)              return 'BACKSLASH'
 
 ([""]).*?\1                 return 'SENTENCE'
 [0-9]+                      return 'NUMBER'
 
-'"'                         return '"' // quotation mark
+(\"|quotation\smark)        return '"'
 
 <<EOF>>                     return 'EOF'
 .                           return 'CHARACTER'
@@ -190,7 +190,7 @@ character
     | '?'
         { $$ = "\\?"; }
     | '('
-        { $$ = "\\)"; }
+        { $$ = "\\("; }
     | ')'
         { $$ = "\\)"; }
     | '{'
