@@ -136,6 +136,8 @@ describe('natural-regex', () => {
       const regexp = NaturalRegex.parse('alphanumeric');
       expect(regexp).toBeA('string');
       expect(regexp).toEqual('\\w');
+      expect(NaturalRegex.parse('')).toEqual('');
+      expect(NaturalRegex.parse('  ')).toEqual('');
     });
 
     it('should get parser', () => {

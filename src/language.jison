@@ -53,8 +53,8 @@ non\s(digit|number)         return 'NON_DIGIT'
 (\+|plus)                   return '+'
 (\*|asterisk)               return '*'
 (\?|question\smark)         return '?'
-(\(|left\sround\sbracket)    return '('
-(\)|right\sround\sbracket)   return ')'
+(\(|left\sround\sbracket)   return '('
+(\)|right\sround\sbracket)  return ')'
 (\{|left\scurly\sbracket)   return '{'
 (\}|right\scurly\sbracket)  return '}'
 (\[|left\ssquare\sbracket)  return '['
@@ -63,12 +63,10 @@ non\s(digit|number)         return 'NON_DIGIT'
 (\!|exclamation\smark)      return '!'
 (\$|dollar)                 return '$'
 (\||pipe)                   return '|'
+(\"|quotation\smark)        return '"'
 (\\|backslash)              return 'BACKSLASH'
 
-([""]).*?\1                 return 'SENTENCE'
 [0-9]+                      return 'NUMBER'
-
-(\"|quotation\smark)        return '"'
 
 <<EOF>>                     return 'EOF'
 .                           return 'CHARACTER'
@@ -76,7 +74,7 @@ non\s(digit|number)         return 'NON_DIGIT'
 
 /lex
 
-%left GROUP END_GROUP CHARACTER_SET NOT_CHARACTER_SET
+%left GROUP END_GROUP CHARACTER_SET NOT_CHARACTER_SET '"'
 %left MINIMUM_LENGTH LENGTH FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
 %left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ',' '.' EOF
 %left STARTS_WITH
@@ -87,20 +85,22 @@ non\s(digit|number)         return 'NON_DIGIT'
 %%
 
 e
-    : e EOF
+    : EOF
+        { return ""; }
+    | e EOF
         { return $1; }
     | e '.'
-        { $$ = $1 }
+        { $$ = $1; }
     | e AND e
-        { $$ = $1 + $3}
+        { $$ = $1 + $3; }
     | e ',' e
-        { $$ = $1 + $3}
+        { $$ = $1 + $3; }
     | e THEN e
-        { $$ = $1 + $3}
+        { $$ = $1 + $3; }
     | e ',' THEN e
-        { $$ = $1 + $4}
+        { $$ = $1 + $4; }
     | e AND THEN e
-        { $$ = $1 + $4}
+        { $$ = $1 + $4; }
     | STARTS_WITH e
         { $$ = "^(" + $2 + ")"; }
     | GROUP e END_GROUP
@@ -117,27 +117,16 @@ e
         { $$ = "(" + $1 + ")" + "(?!" + $3 + ")"; }
     | e repetition
         { $$ = "(" + $1 + ")" + $2; }
-    | SENTENCE
-        %{
-            var replaceCharacters = function(input){
-                return input.replace( /([.,^+*?)(}{\]\[:!|$"\\])/,
-                    function(x){
-                        if(x != "\\"){
-                            return "\\" + x;
-                        }else{
-                            return "\\\\";
-                        }
-                    }
-                );
-            };
-            $$ = replaceCharacters($1.substring(1, $1.length - 1));
-        }%
+    | '"' sentence '"'
+        { $$ = $2; }
     | ANYTHING
         { $$ = ".*"; }
     | NUMBER
     | range
     | length
     | character
+    | hexcharacter
+    | specialcharacter
     ;
 
 range
@@ -169,9 +158,21 @@ repetition
         { $$ = "{" + $2 + "}"; }
     ;
 
+sentence
+    : character
+    | character sentence
+        { $$ = $1 + $2 }
+    ;
+
 charset
     : character
+    | hexcharacter
+    | specialcharacter
     | character ',' charset
+        { $$ = $1 + $3 }
+    | hexcharacter ',' charset
+        { $$ = $1 + $3 }
+    | specialcharacter ',' charset
         { $$ = $1 + $3 }
     ;
 
@@ -205,12 +206,15 @@ character
         { $$ = "\\:"; }
     | '!'
         { $$ = "\\!"; }
-    | '"'
-        { $$ = "\\\""; }
     | '$'
         { $$ = "\\$"; }
     | '|'
         { $$ = "\\|"; }
+    ;
+
+specialcharacter
+    : '"'
+        { $$ = "\\\""; }
     | BACKSLASH
         { $$ = "\\\\"; }
     | CONTROL_CHARACTER character
@@ -245,7 +249,10 @@ character
         { $$ = "."; }
     | END
         { $$ = "$"; }
-    | HEX CHARACTER CHARACTER
+    ;
+
+hexcharacter
+    : HEX CHARACTER CHARACTER
         { $$ = "\\x" + $2 + $3; }
     | HEX CHARACTER CHARACTER CHARACTER CHARACTER
         { $$ = "\\u" + $2 + $3 + $4 + $5; }

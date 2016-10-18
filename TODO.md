@@ -1,7 +1,3 @@
-SENTENCE
-
-- [ ] Refactoring
-
 ESCAPE CHARACTERS IN [] and ()
 
 - [ ] (
@@ -12,12 +8,11 @@ ESCAPE CHARACTERS IN [] and ()
 - [ ] -
 - [ ] General control
 
-GROUP "e" in () (like "OR" or "STARTS_WITH")
+'"' TOKEN IN SPECIALCHARACTERS?
 
-TEST
+HELPERS
 
-- [ ] empty string
-- [ ] only spaces
+- [ ] boolean => (true|false)
+- [ ] word
 
-README
-- [ ] Documentation
+DOCUMENTATION
