@@ -252,6 +252,12 @@ describe('natural-regex', () => {
         NaturalRegex.from('alphanumeric for 7 times').toString()
       ).toEqual('/(\\w){7}/');
     });
+
+    it('smallest', () => {
+      expect(
+        NaturalRegex.from('alphanumeric optional more times (smallest)').toString()
+      ).toEqual('/(\\w)*?/');
+    });
   });
 
   describe('Binary', () => {
@@ -503,7 +509,7 @@ describe('natural-regex', () => {
       expect(backslashOrS.test('\\s')).toBeTruthy();
     });
 
-    it('-', () => {
+    /* it('-', () => {
       let minus = NaturalRegex.from('-');
       expect(
         minus.toString()
@@ -517,6 +523,6 @@ describe('natural-regex', () => {
       expect(minus.test('a')).toBeTruthy();
       expect(minus.test('-')).toBeTruthy();
       expect(minus.test('b')).toBeFalsy();
-    });
+    }); */
   });
 });

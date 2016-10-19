@@ -35,6 +35,7 @@ non\s(digit|number)         return 'NON_DIGIT'
                             return 'ONE_OR_MORE_REPETITION'
 "optional one time"         return 'ZERO_OR_ONE_REPETITION'
 "times"                     return 'REPETITION'
+"(smallest)"                return 'SMALLEST'
 
 "minimum length"            return 'MINIMUM_LENGTH'
 "length"                    return 'LENGTH'
@@ -146,7 +147,9 @@ length
     ;
 
 repetition
-    : OPTIONAL_REPETITION
+    : repetition SMALLEST
+        { $$ = $1 + "?"; }
+    | OPTIONAL_REPETITION
         { $$ = "*"; }
     | ONE_OR_MORE_REPETITION
         { $$ = "+"; }
