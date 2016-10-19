@@ -52,6 +52,7 @@ non\s(digit|number)         return 'NON_DIGIT'
 
 (\^|caret)                  return '^'
 (\+|plus)                   return '+'
+(\-|minus)                  return '-'
 (\*|asterisk)               return '*'
 (\?|question\smark)         return '?'
 (\(|left\sround\sbracket)   return '('
@@ -181,6 +182,8 @@ charset
 
 character
     : CHARACTER
+    | '-'
+        { $$ = "\\-"; }
     | '.'
         { $$ = "\\."; }
     | ','

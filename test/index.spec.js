@@ -509,11 +509,15 @@ describe('natural-regex', () => {
       expect(backslashOrS.test('\\s')).toBeTruthy();
     });
 
-    /* it('-', () => {
+    it('-', () => {
       let minus = NaturalRegex.from('-');
       expect(
         minus.toString()
-      ).toEqual('/-/');
+      ).toEqual('/\\-/');
+      minus = NaturalRegex.from('minus');
+      expect(
+        minus.toString()
+      ).toEqual('/\\-/');
       expect(minus.test(' ')).toBeFalsy();
       expect(minus.test('-')).toBeTruthy();
       minus = NaturalRegex.from('in charset: a, -, c.');
@@ -523,6 +527,6 @@ describe('natural-regex', () => {
       expect(minus.test('a')).toBeTruthy();
       expect(minus.test('-')).toBeTruthy();
       expect(minus.test('b')).toBeFalsy();
-    }); */
+    });
   });
 });
