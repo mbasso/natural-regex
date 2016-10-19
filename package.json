@@ -1,6 +1,6 @@
 {
   "name": "natural-regex",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Regular expressions in natural language",
   "main": "lib/index.js",
   "jsnext:main": "es/index.js",

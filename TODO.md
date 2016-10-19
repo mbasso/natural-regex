@@ -11,5 +11,3 @@ HELPERS
 - [ ] word
 
 DOCUMENTATION
-
-SMALLEST MATCH (x*? for example)
