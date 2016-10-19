@@ -64,7 +64,7 @@ non\s(digit|number)         return 'NON_DIGIT'
 (\$|dollar)                 return '$'
 (\||pipe)                   return '|'
 (\"|quotation\smark)        return '"'
-(\\|backslash)              return 'BACKSLASH'
+(\\|backslash)              return '\\'
 
 [0-9]+                      return 'NUMBER'
 
@@ -104,7 +104,7 @@ e
     | STARTS_WITH e
         { $$ = "^(" + $2 + ")"; }
     | GROUP e END_GROUP
-        { $$ = "(?:" + $2 + ")"; }
+        { $$ = "(" + $2 + ")"; }
     | CHARACTER_SET charset '.'
         { $$ = "[" + $2 + "]"; }
     | NOT_CHARACTER_SET charset '.'
@@ -210,13 +210,13 @@ character
         { $$ = "\\$"; }
     | '|'
         { $$ = "\\|"; }
+    | '\\'
+        { $$ = "\\\\"; }
     ;
 
 specialcharacter
     : '"'
         { $$ = "\\\""; }
-    | BACKSLASH
-        { $$ = "\\\\"; }
     | CONTROL_CHARACTER character
         { $$ = "\\c" + $2; }
     | TAB

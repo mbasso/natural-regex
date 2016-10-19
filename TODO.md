@@ -1,10 +1,5 @@
-ESCAPE CHARACTERS IN [] and ()
+ESCAPE CHARACTERS IN []
 
-- [ ] (
-- [ ] )
-- [ ] \
-- [ ] ^
-- [ ] ]
 - [ ] -
 - [ ] General control
 
@@ -16,3 +11,5 @@ HELPERS
 - [ ] word
 
 DOCUMENTATION
+
+SMALLEST MATCH (x*? for example)

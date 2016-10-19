@@ -186,7 +186,7 @@ describe('natural-regex', () => {
     it('Group', () => {
       expect(
         NaturalRegex.from('group from a to z end group.').toString()
-      ).toEqual('/(?:a-z)/');
+      ).toEqual('/(a-z)/');
     });
 
     it('Charset', () => {
@@ -470,6 +470,53 @@ describe('natural-regex', () => {
       expect(
         NaturalRegex.from('backslash').toString()
       ).toEqual(compiled);
+    });
+  });
+
+  describe('Escape', () => {
+    it('[ and ]', () => {
+      const brackets = NaturalRegex.from('in charset: [, ], a, c.');
+      expect(
+        brackets.toString()
+      ).toEqual('/[\\[\\]ac]/');
+      expect(brackets.test('[')).toBeTruthy();
+      expect(brackets.test(']')).toBeTruthy();
+      expect(brackets.test('a')).toBeTruthy();
+      expect(brackets.test('c')).toBeTruthy();
+    });
+
+    it('( and )', () => {
+      const brackets = NaturalRegex.from('( or )');
+      expect(
+        brackets.toString()
+      ).toEqual('/(\\(|\\))/');
+      expect(brackets.test('()')).toBeTruthy();
+      expect(brackets.test(')')).toBeTruthy();
+    });
+
+    it('\\', () => {
+      const backslashOrS = NaturalRegex.from('\\ then s');
+      expect(
+        backslashOrS.toString()
+      ).toEqual('/\\\\s/');
+      expect(backslashOrS.test(' ')).toBeFalsy();
+      expect(backslashOrS.test('\\s')).toBeTruthy();
+    });
+
+    it('-', () => {
+      let minus = NaturalRegex.from('-');
+      expect(
+        minus.toString()
+      ).toEqual('/-/');
+      expect(minus.test(' ')).toBeFalsy();
+      expect(minus.test('-')).toBeTruthy();
+      minus = NaturalRegex.from('in charset: a, -, c.');
+      expect(
+        minus.toString()
+      ).toEqual('/[a\\-c]/');
+      expect(minus.test('a')).toBeTruthy();
+      expect(minus.test('-')).toBeTruthy();
+      expect(minus.test('b')).toBeFalsy();
     });
   });
 });
