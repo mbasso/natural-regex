@@ -178,6 +178,8 @@ charset
     | range
     | charset ',' charset
         { $$ = $1 + $3 }
+    | charset AND charset
+        { $$ = $1 + $3 }
     ;
 
 character

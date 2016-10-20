@@ -197,7 +197,7 @@ describe('natural-regex', () => {
 
     it('Not in charset', () => {
       expect(
-        NaturalRegex.from('not in charset: a, b, c, d, from a to z, from 0 to 9.').toString()
+        NaturalRegex.from('not in charset: a, b, c, d, from a to z and from 0 to 9.').toString()
       ).toEqual('/[^abcda-z0-9]/');
     });
   });
