@@ -169,7 +169,7 @@ describe('natural-regex', () => {
       ).toEqual(compiled);
       expect(
         NaturalRegex.from('alphanumeric.').toString()
-      ).toEqual('/\\w/');
+      ).toEqual('/(\\w)/');
       expect(
         NaturalRegex.from('alphanumeric then alphanumeric').toString()
       ).toEqual(compiled);
@@ -183,9 +183,9 @@ describe('natural-regex', () => {
   });
 
   describe('Set and Group', () => {
-    it('Group', () => {
+    it('group with "."', () => {
       expect(
-        NaturalRegex.from('group from a to z end group.').toString()
+        NaturalRegex.from('from a to z.').toString()
       ).toEqual('/(a-z)/');
     });
 
@@ -197,8 +197,8 @@ describe('natural-regex', () => {
 
     it('Not in charset', () => {
       expect(
-        NaturalRegex.from('not in charset: a, b, c, d.').toString()
-      ).toEqual('/[^abcd]/');
+        NaturalRegex.from('not in charset: a, b, c, d, from a to z, from 0 to 9.').toString()
+      ).toEqual('/[^abcda-z0-9]/');
     });
   });
 

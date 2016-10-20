@@ -76,23 +76,28 @@ non\s(digit|number)         return 'NON_DIGIT'
 
 /lex
 
-%left GROUP END_GROUP CHARACTER_SET NOT_CHARACTER_SET '"'
+%left '.' CHARACTER_SET NOT_CHARACTER_SET '"'
 %left MINIMUM_LENGTH LENGTH FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
 %left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ',' '.' EOF
 %left STARTS_WITH
 %left OR
 
-%start e
+%start file
 
 %%
 
-e
+file
     : EOF
         { return ""; }
     | e EOF
         { return $1; }
-    | e '.'
-        { $$ = $1; }
+    ;
+
+e
+    : e '.'
+        { $$ = "(" + $1 + ")"; }
+    | e '.' e
+        { $$ = "(" + $1 + ")(" + $2 + ")"; }
     | e AND e
         { $$ = $1 + $3; }
     | e ',' e
@@ -105,8 +110,6 @@ e
         { $$ = $1 + $4; }
     | STARTS_WITH e
         { $$ = "^(" + $2 + ")"; }
-    | GROUP e END_GROUP
-        { $$ = "(" + $2 + ")"; }
     | CHARACTER_SET charset '.'
         { $$ = "[" + $2 + "]"; }
     | NOT_CHARACTER_SET charset '.'
@@ -172,11 +175,8 @@ charset
     : character
     | hexcharacter
     | specialcharacter
-    | character ',' charset
-        { $$ = $1 + $3 }
-    | hexcharacter ',' charset
-        { $$ = $1 + $3 }
-    | specialcharacter ',' charset
+    | range
+    | charset ',' charset
         { $$ = $1 + $3 }
     ;
 
