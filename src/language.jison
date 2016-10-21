@@ -43,6 +43,7 @@ non\s(digit|number)         return 'NON_DIGIT'
 "from"                      return 'FROM'
 "to"                        return 'TO'
 "end"                       return 'END'
+"start"                     return 'START'
 "then"                      return 'THEN'
 "or"                        return 'OR'
 "and"                       return 'AND'
@@ -76,7 +77,7 @@ non\s(digit|number)         return 'NON_DIGIT'
 
 /lex
 
-%left '.' CHARACTER_SET NOT_CHARACTER_SET '"'
+%left GROUP END_GROUP '.' CHARACTER_SET NOT_CHARACTER_SET '"'
 %left MINIMUM_LENGTH LENGTH FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
 %left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ',' '.' EOF
 %left STARTS_WITH
@@ -110,6 +111,8 @@ e
         { $$ = $1 + $4; }
     | STARTS_WITH e
         { $$ = "^(" + $2 + ")"; }
+    | GROUP e END_GROUP
+        { $$ = "(" + $2 + ")"; }
     | CHARACTER_SET charset '.'
         { $$ = "[" + $2 + "]"; }
     | NOT_CHARACTER_SET charset '.'
@@ -255,6 +258,8 @@ specialcharacter
         { $$ = "[\\b]"; }
     | ANY_CHARACTER
         { $$ = "."; }
+    | START
+        { $$ = "^"; }
     | END
         { $$ = "$"; }
     ;

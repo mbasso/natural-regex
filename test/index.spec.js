@@ -159,6 +159,12 @@ describe('natural-regex', () => {
       ).toEqual('/^(\\w)$/');
     });
 
+    it('start', () => {
+      expect(
+        NaturalRegex.from('start, alphanumeric, end').toString()
+      ).toEqual('/^\\w$/');
+    });
+
     it('end of line', () => {
       const compiled = '/\\w\\w/';
       expect(
@@ -183,6 +189,11 @@ describe('natural-regex', () => {
   });
 
   describe('Set and Group', () => {
+    it('group', () => {
+      expect(
+        NaturalRegex.from('group from a to z end group').toString()
+      ).toEqual('/(a-z)/');
+    });
     it('group with "."', () => {
       expect(
         NaturalRegex.from('from a to z.').toString()
