@@ -50,6 +50,7 @@ non\s(digit|number)         return 'NON_DIGIT'
 "for"                       return 'FOR'
 (\,|comma)                  return ','
 (\.|point)                  return '.'
+(\;|semicolon)              return ';'
 
 (\^|caret)                  return '^'
 (\+|plus)                   return '+'
@@ -113,9 +114,9 @@ e
         { $$ = "^(" + $2 + ")"; }
     | GROUP e END_GROUP
         { $$ = "(" + $2 + ")"; }
-    | CHARACTER_SET charset '.'
+    | CHARACTER_SET charset ';'
         { $$ = "[" + $2 + "]"; }
-    | NOT_CHARACTER_SET charset '.'
+    | NOT_CHARACTER_SET charset ';'
         { $$ = "[^" + $2 + "]"; }
     | e OR e
         { $$ = "(" + $1 + "|" + $3 + ")"; }
@@ -187,6 +188,8 @@ charset
 
 character
     : CHARACTER
+    | ';'
+        { $$ = ";"; }
     | '-'
         { $$ = "\\-"; }
     | '.'

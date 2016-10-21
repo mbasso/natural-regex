@@ -202,13 +202,13 @@ describe('natural-regex', () => {
 
     it('Charset', () => {
       expect(
-        NaturalRegex.from('in charset: a, b, c, d.').toString()
+        NaturalRegex.from('in charset: a, b, c, d;').toString()
       ).toEqual('/[abcd]/');
     });
 
     it('Not in charset', () => {
       expect(
-        NaturalRegex.from('not in charset: a, b, c, d, from a to z and from 0 to 9.').toString()
+        NaturalRegex.from('not in charset: a, b, c, d, from a to z and from 0 to 9;').toString()
       ).toEqual('/[^abcda-z0-9]/');
     });
   });
@@ -336,6 +336,16 @@ describe('natural-regex', () => {
       ).toEqual(compiled);
       expect(
         NaturalRegex.from('plus').toString()
+      ).toEqual(compiled);
+    });
+
+    it('semicolon', () => {
+      const compiled = '/;/';
+      expect(
+        NaturalRegex.from(';').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('semicolon').toString()
       ).toEqual(compiled);
     });
 
@@ -492,7 +502,7 @@ describe('natural-regex', () => {
 
   describe('Escape', () => {
     it('[ and ]', () => {
-      const brackets = NaturalRegex.from('in charset: [, ], a, c.');
+      const brackets = NaturalRegex.from('in charset: [, ], a, c;');
       expect(
         brackets.toString()
       ).toEqual('/[\\[\\]ac]/');
@@ -531,7 +541,7 @@ describe('natural-regex', () => {
       ).toEqual('/\\-/');
       expect(minus.test(' ')).toBeFalsy();
       expect(minus.test('-')).toBeTruthy();
-      minus = NaturalRegex.from('in charset: a, -, c.');
+      minus = NaturalRegex.from('in charset: a, -, c;');
       expect(
         minus.toString()
       ).toEqual('/[a\\-c]/');
