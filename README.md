@@ -36,6 +36,8 @@ LoremFooOrBar.test('Lorem bar'); // this evaluates true
 LoremFooOrBar.test('Lorem text'); // this evaluates false
 ```
 
+NaturalRegex also includes a [command line tool](https://github.com/mbasso/natural-regex-cli), check [this](https://github.com/mbasso/natural-regex/wiki/Getting-Started) for more information.
+
 ## Documentation
 
 Visit the [Wiki](https://github.com/mbasso/natural-regex/wiki) for the full documentation.
