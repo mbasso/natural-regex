@@ -6,12 +6,16 @@
 [![Coverage Status](https://coveralls.io/repos/github/mbasso/natural-regex/badge.svg?branch=master)](https://coveralls.io/github/mbasso/natural-regex?branch=master)
 [![Join the chat at https://gitter.im/mbasso/natural-regex](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mbasso/natural-regex?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-> Regular expressions in natural language
+> Create regex from natural language
 
 ---
 
 **Attention - This project isn't completed yet. There might be breaking changes until version 1.0.0. Feel free to contribute, see [TODO](https://github.com/mbasso/natural-regex/blob/master/TODO.md) to get started.**
 ---
+
+[natural-regex](https://github.com/mbasso/natural-regex) is a parser that allows you to write regular expressions in natural language.
+This means that you can write self documentating regex using a simpler syntax that can be undestood by anyone.
+No more pain with validations and other stuff.
 
 ---
 
