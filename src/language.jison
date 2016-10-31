@@ -5,13 +5,8 @@
 
 "vertical tab"              return 'VERTICAL_TAB'
 "tab"                       return 'TAB'
-(alphanumeric)              return 'ALPHANUMERIC'
-"letter"                    return 'LETTER'
-"uppercase"                 return 'UPPERCASE'
-"lowercase"                 return 'LOWERCASE'
-"word"                      return 'WORD'
-"number"                    return 'TYPE_NUMBER'
-"non word"                  return 'NON_WORD'
+"alphanumeric"              return 'ALPHANUMERIC'
+"non letter"                return 'NON_WORD'
 "white space"               return 'WHITE_SPACE'
 "space"                     return 'SPACE'
 (null|nothing|nil)          return 'NULL'
@@ -74,6 +69,24 @@
 (\||pipe)                   return '|'
 (\"|quotation\smark)        return '"'
 (\\|backslash)              return '\\'
+
+"letter"                    return 'LETTER'
+"uppercase"                 return 'UPPERCASE'
+"lowercase"                 return 'LOWERCASE'
+"word"                      return 'WORD'
+"positive"                  return 'POSITIVE'
+"negative"                  return 'NEGATIVE'
+"number"                    return 'TYPE_NUMBER'
+"decimal"                   return 'DECIMAL'
+"date"                      return 'DATE'
+"email"                     return 'EMAIL'
+"url"                       return 'URL'
+"ip address"                return 'IP_ADDRESS'
+"html tag"                  return 'HTML_TAG'
+"slug"                      return 'SLUG'
+"username"                  return 'USERNAME'
+"password"                  return 'PASSWORD'
+"decimal"                   return 'DECIMAL'
 
 [0-9]+                      return 'NUMBER'
 
@@ -291,6 +304,38 @@ helper
         { $$ = "[a-z]"; }
     | WORD
         { $$ = "[a-zA-Z]+"; }
+    | UPPERCASE WORD
+        { $$ = "[A-Z]+"; }
+    | LOWERCASE WORD
+        { $$ = "[a-z]+"; }
     | TYPE_NUMBER
+        { $$ = "\\-?[0-9]+"; }
+    | NEGATIVE TYPE_NUMBER
+        { $$ = "\\-[0-9]+"; }
+    | POSITIVE TYPE_NUMBER
         { $$ = "[0-9]+"; }
+    | DECIMAL
+        { $$ = "\\-?\\d+(?:\\.\\d{0,2})?" }
+    | NEGATIVE DECIMAL
+        { $$ = "\\-\\d+(?:\\.\\d{0,2})?"; }
+    | POSITIVE DECIMAL
+        { $$ = "\\d+(?:\\.\\d{0,2})?"; }
+    | HTML_TAG
+        { $$ = "<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\\/>)"; }
+    | IP_ADDRESS
+        { $$ = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)"; }
+    | URL
+        { $$ = "(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?"; }
+    | EMAIL
+        { $$ = "([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})"; }
+    | SLUG
+        { $$ = "[a-z0-9-]+"; }
+    | USERNAME
+        { $$ = "[a-z0-9_-]{3,16}"; }
+    | PASSWORD
+        { $$ = "[a-zA-Z0-9_-]{6,18}"; }
+    | HEX
+        { $$ = "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})"; }
+    | DATE
+        { $$ = "(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})"; }
     ;
