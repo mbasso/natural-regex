@@ -1,6 +1,3 @@
-HELPERS
-
-- [ ] boolean => (true|false)
-- [ ] word
+FIND OTHER HELPERS
 
 DOCUMENTATION

@@ -5,7 +5,12 @@
 
 "vertical tab"              return 'VERTICAL_TAB'
 "tab"                       return 'TAB'
-(alphanumeric|word)         return 'ALPHANUMERIC'
+(alphanumeric)              return 'ALPHANUMERIC'
+"letter"                    return 'LETTER'
+"uppercase"                 return 'UPPERCASE'
+"lowercase"                 return 'LOWERCASE'
+"word"                      return 'WORD'
+"number"                    return 'TYPE_NUMBER'
 "non word"                  return 'NON_WORD'
 "white space"               return 'WHITE_SPACE'
 "space"                     return 'SPACE'
@@ -13,8 +18,8 @@
 (return|new\sline)          return 'RETURN'
 "line feed"                 return 'LINE_FEED'
 "form feed"                 return 'FORM_FEED'
-non\s(digit|number)         return 'NON_DIGIT'
-(digit|number)              return 'DIGIT'
+"non digit"                 return 'NON_DIGIT'
+"digit"                     return 'DIGIT'
 "backspace"                 return 'BACKSPACE'
 "any character"             return 'ANY_CHARACTER'
 "starts with"               return 'STARTS_WITH'
@@ -136,6 +141,7 @@ e
     | character
     | hexcharacter
     | specialcharacter
+    | helper
     ;
 
 range
@@ -274,4 +280,17 @@ hexcharacter
         { $$ = "\\u" + $2 + $3 + $4 + $5; }
     | HEX NUMBER
         { $$ = "\\x" + $2; }
+    ;
+
+helper
+    : LETTER
+        { $$ = "[a-zA-Z]"; }
+    | UPPERCASE LETTER
+        { $$ = "[A-Z]"; }
+    | LOWERCASE LETTER
+        { $$ = "[a-z]"; }
+    | WORD
+        { $$ = "[a-zA-Z]+"; }
+    | TYPE_NUMBER
+        { $$ = "[0-9]+"; }
     ;

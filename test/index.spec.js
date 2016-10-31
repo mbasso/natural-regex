@@ -73,17 +73,11 @@ describe('natural-regex', () => {
       expect(
         NaturalRegex.from('digit').toString()
       ).toEqual('/\\d/');
-      expect(
-        NaturalRegex.from('number').toString()
-      ).toEqual('/\\d/');
     });
 
     it('non digit', () => {
       expect(
         NaturalRegex.from('non digit').toString()
-      ).toEqual('/\\D/');
-      expect(
-        NaturalRegex.from('non number').toString()
       ).toEqual('/\\D/');
     });
 
@@ -548,6 +542,59 @@ describe('natural-regex', () => {
       expect(minus.test('a')).toBeTruthy();
       expect(minus.test('-')).toBeTruthy();
       expect(minus.test('b')).toBeFalsy();
+    });
+  });
+
+  describe('Helpers', () => {
+    it('letter', () => {
+      const letter = NaturalRegex.from('starts with letter');
+      expect(
+        letter.toString()
+      ).toEqual('/^(?:[a-zA-Z])/');
+      expect(letter.test('a')).toBeTruthy();
+      expect(letter.test('A')).toBeTruthy();
+      expect(letter.test('3')).toBeFalsy();
+    });
+
+    it('lowercase letter', () => {
+      const letter = NaturalRegex.from('starts with lowercase letter');
+      expect(
+        letter.toString()
+      ).toEqual('/^(?:[a-z])/');
+      expect(letter.test('a')).toBeTruthy();
+      expect(letter.test('A')).toBeFalsy();
+      expect(letter.test('3')).toBeFalsy();
+    });
+
+    it('uppercase letter', () => {
+      const letter = NaturalRegex.from('starts with uppercase letter');
+      expect(
+        letter.toString()
+      ).toEqual('/^(?:[A-Z])/');
+      expect(letter.test('a')).toBeFalsy();
+      expect(letter.test('A')).toBeTruthy();
+      expect(letter.test('3')).toBeFalsy();
+    });
+
+    it('word', () => {
+      const word = NaturalRegex.from('starts with word, end');
+      expect(
+        word.toString()
+      ).toEqual('/^(?:[a-zA-Z]+)$/');
+      expect(word.test('foo')).toBeTruthy();
+      expect(word.test('1')).toBeFalsy();
+      expect(word.test('foo2bar')).toBeFalsy();
+    });
+
+    it('number', () => {
+      const word = NaturalRegex.from('starts with number, end');
+      expect(
+        word.toString()
+      ).toEqual('/^(?:[0-9]+)$/');
+      expect(word.test('foo')).toBeFalsy();
+      expect(word.test('1')).toBeTruthy();
+      expect(word.test('1432')).toBeTruthy();
+      expect(word.test('foo2bar')).toBeFalsy();
     });
   });
 });
