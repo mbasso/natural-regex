@@ -150,13 +150,13 @@ describe('natural-regex', () => {
     it('starts with', () => {
       expect(
         NaturalRegex.from('starts with alphanumeric').toString()
-      ).toEqual('/^(\\w)/');
+      ).toEqual('/^(?:\\w)/');
     });
 
     it('end', () => {
       expect(
         NaturalRegex.from('starts with alphanumeric, end').toString()
-      ).toEqual('/^(\\w)$/');
+      ).toEqual('/^(?:\\w)$/');
     });
 
     it('start', () => {
@@ -175,7 +175,7 @@ describe('natural-regex', () => {
       ).toEqual(compiled);
       expect(
         NaturalRegex.from('alphanumeric.').toString()
-      ).toEqual('/(\\w)/');
+      ).toEqual('/(?:\\w)/');
       expect(
         NaturalRegex.from('alphanumeric then alphanumeric').toString()
       ).toEqual(compiled);
@@ -197,7 +197,7 @@ describe('natural-regex', () => {
     it('group with "."', () => {
       expect(
         NaturalRegex.from('from a to z.').toString()
-      ).toEqual('/(a-z)/');
+      ).toEqual('/(?:a-z)/');
     });
 
     it('Charset', () => {
@@ -237,37 +237,37 @@ describe('natural-regex', () => {
     it('optional more times', () => {
       expect(
         NaturalRegex.from('alphanumeric optional more times').toString()
-      ).toEqual('/(\\w)*/');
+      ).toEqual('/(?:\\w)*/');
     });
 
     it('required one or more times', () => {
       expect(
         NaturalRegex.from('alphanumeric required one or more times').toString()
-      ).toEqual('/(\\w)+/');
+      ).toEqual('/(?:\\w)+/');
     });
 
     it('optional one time', () => {
       expect(
         NaturalRegex.from('alphanumeric optional one time').toString()
-      ).toEqual('/(\\w)?/');
+      ).toEqual('/(?:\\w)?/');
     });
 
     it('from to times', () => {
       expect(
         NaturalRegex.from('alphanumeric from 1 to 7 times').toString()
-      ).toEqual('/(\\w){1,7}/');
+      ).toEqual('/(?:\\w){1,7}/');
     });
 
     it('for 7 times', () => {
       expect(
         NaturalRegex.from('alphanumeric for 7 times').toString()
-      ).toEqual('/(\\w){7}/');
+      ).toEqual('/(?:\\w){7}/');
     });
 
     it('smallest', () => {
       expect(
         NaturalRegex.from('alphanumeric optional more times (smallest)').toString()
-      ).toEqual('/(\\w)*?/');
+      ).toEqual('/(?:\\w)*?/');
     });
   });
 
@@ -275,19 +275,19 @@ describe('natural-regex', () => {
     it('or', () => {
       expect(
         NaturalRegex.from('alphanumeric or digit').toString()
-      ).toEqual('/(\\w|\\d)/');
+      ).toEqual('/(?:\\w|\\d)/');
     });
 
     it('followed by', () => {
       expect(
         NaturalRegex.from('alphanumeric followed by digit').toString()
-      ).toEqual('/(\\w)(?=\\d)/');
+      ).toEqual('/(?:\\w)(?=\\d)/');
     });
 
     it('not followed by', () => {
       expect(
         NaturalRegex.from('alphanumeric not followed by digit').toString()
-      ).toEqual('/(\\w)(?!\\d)/');
+      ).toEqual('/(?:\\w)(?!\\d)/');
     });
 
     it('range', () => {
@@ -516,7 +516,7 @@ describe('natural-regex', () => {
       const brackets = NaturalRegex.from('( or )');
       expect(
         brackets.toString()
-      ).toEqual('/(\\(|\\))/');
+      ).toEqual('/(?:\\(|\\))/');
       expect(brackets.test('()')).toBeTruthy();
       expect(brackets.test(')')).toBeTruthy();
     });
