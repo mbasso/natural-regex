@@ -736,7 +736,7 @@ describe('natural-regex', () => {
       expect(
         username.toString()
         //eslint-disable-next-line
-      ).toEqual('/^(?:[a-z0-9_-]{3,16})$/');
+      ).toEqual('/^(?:[a-zA-Z0-9_-]{3,16})$/');
       expect(username.test('mbasso')).toBeTruthy();
       expect(username.test('mbasso96')).toBeTruthy();
       expect(username.test('mbasso%96')).toBeFalsy();
