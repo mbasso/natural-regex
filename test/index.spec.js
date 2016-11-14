@@ -492,6 +492,16 @@ describe('natural-regex', () => {
         NaturalRegex.from('backslash').toString()
       ).toEqual(compiled);
     });
+
+    it('slash', () => {
+      const compiled = '/\\//';
+      expect(
+        NaturalRegex.from('/').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('slash').toString()
+      ).toEqual(compiled);
+    });
   });
 
   describe('Escape', () => {

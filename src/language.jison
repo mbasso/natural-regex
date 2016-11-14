@@ -69,6 +69,7 @@
 (\||pipe)                   return '|'
 (\"|quotation\smark)        return '"'
 (\\|backslash)              return '\\'
+(\/|slash)                  return '/'
 
 "letter"                    return 'LETTER'
 "uppercase"                 return 'UPPERCASE'
@@ -245,6 +246,8 @@ character
         { $$ = "\\|"; }
     | '\\'
         { $$ = "\\\\"; }
+    | '/'
+        { $$ = "\\/"; }
     ;
 
 specialcharacter
