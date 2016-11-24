@@ -655,17 +655,126 @@ describe('natural-regex', () => {
       expect(number.test('foo2bar')).toBeFalsy();
     });
 
-    it('date', () => {
-      const date = NaturalRegex.from('starts with date, end');
-      expect(
-        date.toString()
-        //eslint-disable-next-line
-      ).toEqual('/^(?:(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2}))$/');
-      expect(date.test('01/01/1900')).toBeTruthy();
-      expect(date.test('01-01-1900')).toBeTruthy();
-      expect(date.test('01.01.1900')).toBeTruthy();
-      expect(date.test('32/07/1900')).toBeFalsy();
-      expect(date.test('foo2bar')).toBeFalsy();
+    describe('date', () => {
+      it('date', () => {
+        const date = NaturalRegex.from('starts with date, end');
+        expect(
+          date.toString()
+          //eslint-disable-next-line
+        ).toEqual('/^(?:(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2}))$/');
+        expect(date.test('01/01/1900')).toBeTruthy();
+        expect(date.test('01-01-1900')).toBeTruthy();
+        expect(date.test('01.01.1900')).toBeTruthy();
+        expect(date.test('32/07/1900')).toBeFalsy();
+        expect(date.test('foo2bar')).toBeFalsy();
+      });
+
+      it('hours', () => {
+        const compiled = '/(?:0[0-9]|1[0-9]|2[0-4])/';
+        const hours = NaturalRegex.from('hours');
+        expect(
+          hours.toString()
+        ).toEqual(compiled);
+        expect(
+          NaturalRegex.from('hh').toString()
+        ).toEqual(compiled);
+        expect(hours.test('03')).toBeTruthy();
+        expect(hours.test('13')).toBeTruthy();
+        expect(hours.test('23')).toBeTruthy();
+        expect(hours.test('25')).toBeFalsy();
+      });
+
+      it('minutes', () => {
+        const compiled = '/(?:0[0-9]|[1-5][0-9])/';
+        const hours = NaturalRegex.from('minutes');
+        expect(
+          hours.toString()
+        ).toEqual(compiled);
+        expect(
+          NaturalRegex.from('mm').toString()
+        ).toEqual(compiled);
+        expect(hours.test('03')).toBeTruthy();
+        expect(hours.test('13')).toBeTruthy();
+        expect(hours.test('23')).toBeTruthy();
+        expect(hours.test('61')).toBeFalsy();
+      });
+
+      it('seconds', () => {
+        const compiled = '/(?:0[0-9]|[1-5][0-9])/';
+        const hours = NaturalRegex.from('seconds');
+        expect(
+          hours.toString()
+        ).toEqual(compiled);
+        expect(
+          NaturalRegex.from('ss').toString()
+        ).toEqual(compiled);
+        expect(hours.test('03')).toBeTruthy();
+        expect(hours.test('13')).toBeTruthy();
+        expect(hours.test('23')).toBeTruthy();
+        expect(hours.test('61')).toBeFalsy();
+      });
+
+      it('day', () => {
+        const compiled = '/(?:0[0-9]|[1-2][0-9]|3[01])/';
+        expect(
+          NaturalRegex.from('day').toString()
+        ).toEqual(compiled);
+        expect(
+          NaturalRegex.from('dd').toString()
+        ).toEqual(compiled);
+      });
+
+      it('month', () => {
+        const compiled = '/(?:0[0-9]|1[0-2])/';
+        expect(
+          NaturalRegex.from('month').toString()
+        ).toEqual(compiled);
+        expect(
+          NaturalRegex.from('MM').toString()
+        ).toEqual(compiled);
+      });
+
+      it('year', () => {
+        const compiled = '/[0-9]{4}/';
+        expect(
+          NaturalRegex.from('year').toString()
+        ).toEqual(compiled);
+        expect(
+          NaturalRegex.from('yyyy').toString()
+        ).toEqual(compiled);
+      });
+
+      it('yy', () => {
+        expect(
+          NaturalRegex.from('yy').toString()
+        ).toEqual('/[0-9]{2}/');
+      });
+
+      it('yyyy MM dd', () => {
+        expect(
+          NaturalRegex.from('yyyy MM dd').toString()
+        ).toEqual('/[0-9]{4}(?:0[0-9]|1[0-2])(?:0[0-9]|[1-2][0-9]|3[01])/');
+      });
+
+      it('hh mm ss', () => {
+        expect(
+          NaturalRegex.from('hh mm ss').toString()
+        ).toEqual('/(?:0[0-9]|1[0-9]|2[0-4])(?:0[0-9]|[1-5][0-9])(?:0[0-9]|[1-5][0-9])/');
+      });
+
+      it('hh:mm:ss', () => {
+        expect(
+          NaturalRegex.from('hh:mm:ss').toString()
+        ).toEqual(
+          '/(?:0[0-9]|1[0-9]|2[0-4])\\:(?:0[0-9]|[1-5][0-9])\\:(?:0[0-9]|[1-5][0-9])/'
+        );
+      });
+
+      it('yyyy/MM/dd', () => {
+        expect(
+          NaturalRegex.from('yyyy MM dd').toString()
+        ).toEqual('/[0-9]{4}(?:0[0-9]|1[0-2])(?:0[0-9]|[1-2][0-9]|3[01])/');
+      });
     });
 
     it('email', () => {

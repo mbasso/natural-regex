@@ -89,6 +89,14 @@
 "password"                  return 'PASSWORD'
 "decimal"                   return 'DECIMAL'
 
+(hh|hours)                  return 'HOURS'
+(mm|minutes)                return 'MINUTES'
+(ss|seconds)                return 'SECONDS'
+(dd|day)                    return 'DAY'
+(MM|month)                  return 'MONTH'
+"yy"                        return 'yy'
+(yyyy|year)                 return 'YEAR'
+
 [0-9]+                      return 'NUMBER'
 
 <<EOF>>                     return 'EOF'
@@ -99,7 +107,7 @@
 
 %left GROUP END_GROUP '.' CHARACTER_SET NOT_CHARACTER_SET '"'
 %left MINIMUM_LENGTH LENGTH FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
-%left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ',' '.' EOF
+%left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ','
 %left STARTS_WITH
 %left OR
 
@@ -118,7 +126,7 @@ e
     : e '.'
         { $$ = "(?:" + $1 + ")"; }
     | e '.' e
-        { $$ = "(?:" + $1 + ")(?:" + $2 + ")"; }
+        { $$ = "(?:" + $1 + ")(?:" + $3 + ")"; }
     | e AND e
         { $$ = $1 + $3; }
     | e ',' e
@@ -207,15 +215,19 @@ charset
     ;
 
 character
+    : simplecharacter
+    | '.'
+        { $$ = "\\."; }
+    | ','
+        { $$ = "\\,"; }
+    ;
+
+simplecharacter
     : CHARACTER
     | ';'
         { $$ = ";"; }
     | '-'
         { $$ = "\\-"; }
-    | '.'
-        { $$ = "\\."; }
-    | ','
-        { $$ = "\\,"; }
     | '^'
         { $$ = "\\^"; }
     | '+'
@@ -299,7 +311,8 @@ hexcharacter
     ;
 
 helper
-    : LETTER
+    : datetime
+    | LETTER
         { $$ = "[a-zA-Z]"; }
     | UPPERCASE LETTER
         { $$ = "[A-Z]"; }
@@ -339,6 +352,39 @@ helper
         { $$ = "[a-zA-Z0-9_-]{6,18}"; }
     | HEX
         { $$ = "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})"; }
+    ;
+
+datetime
+    : date
+    | date datetime
+        { $$ = $1 + $2 }
+    | date simplecharacter datetime
+        { $$ = $1 + $2 + $3  }
+    | time
+    | time datetime
+        { $$ = $1 + $2 }
+    | time simplecharacter datetime
+        { $$ = $1 + $2 + $3  }
     | DATE
         { $$ = "(?:(?:31(\\/|-|\\.)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-|\\.)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-|\\.)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-|\\.)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})"; }
+    ;
+
+date
+    : DAY
+        { $$ = "(?:0[0-9]|[1-2][0-9]|3[01])"; }
+    | MONTH
+        { $$ = "(?:0[0-9]|1[0-2])"; }
+    | YEAR
+        { $$ = "[0-9]{4}"; }
+    | yy
+        { $$ = "[0-9]{2}"; }
+    ;
+
+time
+    : HOURS
+        { $$ = "(?:0[0-9]|1[0-9]|2[0-4])"; }
+    | MINUTES
+        { $$ = "(?:0[0-9]|[1-5][0-9])"; }
+    | SECONDS
+        { $$ = "(?:0[0-9]|[1-5][0-9])"; }
     ;
