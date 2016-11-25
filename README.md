@@ -36,9 +36,9 @@ Once you have installed natural-regex, supposing a CommonJS environment, you can
 ```js
 import NaturalRegex from 'natural-regex';
 // you can create regular expressions using our helpers
-const UsernameAndEmail = NaturalRegex.from('starts with username, space, minus, space and then email, end.');
-UsernameAndEmail.test('FooBarUser - foo@bar.com'); // this evaluates true
-UsernameAndEmail.test('Foo Bar foo@bar'); // this evaluates false
+const dateAndEmail = NaturalRegex.from('starts with dd/MM/yyyy, space, minus, space and then email, end.');
+dateAndEmail.test('06/07/2016 - foo@bar.com'); // this evaluates true
+dateAndEmail.test('Foo Bar foo@bar'); // this evaluates false
 // or from scratch
 const LoremFooOrBar = NaturalRegex.from('starts with "Lorem", then space and then "foo" or "bar"');
 LoremFooOrBar.test('Lorem bar'); // this evaluates true

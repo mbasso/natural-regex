@@ -85,8 +85,6 @@
 "ip address"                return 'IP_ADDRESS'
 "html tag"                  return 'HTML_TAG'
 "slug"                      return 'SLUG'
-"username"                  return 'USERNAME'
-"password"                  return 'PASSWORD'
 "decimal"                   return 'DECIMAL'
 
 (hh|hours)                  return 'HOURS'
@@ -346,10 +344,6 @@ helper
         { $$ = "([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})"; }
     | SLUG
         { $$ = "[a-z0-9-]+"; }
-    | USERNAME
-        { $$ = "[a-zA-Z0-9_-]{3,16}"; }
-    | PASSWORD
-        { $$ = "[a-zA-Z0-9_-]{6,18}"; }
     | HEX
         { $$ = "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})"; }
     ;

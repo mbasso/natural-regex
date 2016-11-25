@@ -784,7 +784,8 @@ describe('natural-regex', () => {
         //eslint-disable-next-line
       ).toEqual('/^(?:([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6}))$/');
       expect(email.test('foo@bar.com')).toBeTruthy();
-      expect(email.test('foooo@barrr.loremipsum')).toBeFalsy();
+      expect(email.test('foo@bar.loremipsum')).toBeFalsy();
+      expect(email.test('foo@bar')).toBeFalsy();
       expect(email.test('01.01.1900')).toBeFalsy();
       expect(email.test('32/07/1900')).toBeFalsy();
     });
@@ -797,6 +798,7 @@ describe('natural-regex', () => {
       ).toEqual('/^(?:(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?)$/');
       expect(url.test('http://foo.bar/lorem')).toBeTruthy();
       expect(url.test('https://foo.bar/lorem.exp')).toBeTruthy();
+      expect(url.test('foo.bar/lorem')).toBeTruthy();
       expect(url.test('http://foo/lorem')).toBeFalsy();
       expect(url.test('foo@bar.com')).toBeFalsy();
       expect(url.test('01.01.1900')).toBeFalsy();
@@ -847,68 +849,48 @@ describe('natural-regex', () => {
         //eslint-disable-next-line
       ).toEqual('/^(?:#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3}))$/');
       expect(hex.test('#AF32B3')).toBeTruthy();
-      expect(hex.test('#AFZZ2B3')).toBeFalsy();
-    });
-
-    it('username', () => {
-      const username = NaturalRegex.from('starts with username, end');
-      expect(
-        username.toString()
-        //eslint-disable-next-line
-      ).toEqual('/^(?:[a-zA-Z0-9_-]{3,16})$/');
-      expect(username.test('mbasso')).toBeTruthy();
-      expect(username.test('mbasso96')).toBeTruthy();
-      expect(username.test('mbasso%96')).toBeFalsy();
-    });
-
-    it('password', () => {
-      const password = NaturalRegex.from('starts with password, end');
-      expect(
-        password.toString()
-        //eslint-disable-next-line
-      ).toEqual('/^(?:[a-zA-Z0-9_-]{6,18})$/');
-      expect(password.test('mbasso')).toBeTruthy();
-      expect(password.test('mbasso96')).toBeTruthy();
-      expect(password.test('mbasso%96')).toBeFalsy();
+      expect(hex.test('#AF3')).toBeTruthy();
+      expect(hex.test('#1234567')).toBeFalsy();
+      expect(hex.test('#ZZZZZZ')).toBeFalsy();
     });
 
     it('decimal', () => {
-      const password = NaturalRegex.from('starts with decimal, end');
+      const decimal = NaturalRegex.from('starts with decimal, end');
       expect(
-        password.toString()
+        decimal.toString()
         //eslint-disable-next-line
       ).toEqual('/^(?:\\-?\\d+(?:\\.\\d{0,2})?)$/');
-      expect(password.test('10')).toBeTruthy();
-      expect(password.test('-10')).toBeTruthy();
-      expect(password.test('0.10')).toBeTruthy();
-      expect(password.test('123.5')).toBeTruthy();
-      expect(password.test('123,5')).toBeFalsy();
+      expect(decimal.test('10')).toBeTruthy();
+      expect(decimal.test('-10')).toBeTruthy();
+      expect(decimal.test('0.10')).toBeTruthy();
+      expect(decimal.test('123.5')).toBeTruthy();
+      expect(decimal.test('123,5')).toBeFalsy();
     });
 
     it('positive decimal', () => {
-      const password = NaturalRegex.from('starts with positive decimal, end');
+      const decimal = NaturalRegex.from('starts with positive decimal, end');
       expect(
-        password.toString()
+        decimal.toString()
         //eslint-disable-next-line
       ).toEqual('/^(?:\\d+(?:\\.\\d{0,2})?)$/');
-      expect(password.test('10')).toBeTruthy();
-      expect(password.test('-10')).toBeFalsy();
-      expect(password.test('0.10')).toBeTruthy();
-      expect(password.test('123.5')).toBeTruthy();
-      expect(password.test('123,5')).toBeFalsy();
+      expect(decimal.test('10')).toBeTruthy();
+      expect(decimal.test('-10')).toBeFalsy();
+      expect(decimal.test('0.10')).toBeTruthy();
+      expect(decimal.test('123.5')).toBeTruthy();
+      expect(decimal.test('123,5')).toBeFalsy();
     });
 
     it('negative decimal', () => {
-      const password = NaturalRegex.from('starts with negative decimal, end');
+      const decimal = NaturalRegex.from('starts with negative decimal, end');
       expect(
-        password.toString()
+        decimal.toString()
         //eslint-disable-next-line
       ).toEqual('/^(?:\\-\\d+(?:\\.\\d{0,2})?)$/');
-      expect(password.test('10')).toBeFalsy();
-      expect(password.test('-10')).toBeTruthy();
-      expect(password.test('0.10')).toBeFalsy();
-      expect(password.test('123.5')).toBeFalsy();
-      expect(password.test('123,5')).toBeFalsy();
+      expect(decimal.test('10')).toBeFalsy();
+      expect(decimal.test('-10')).toBeTruthy();
+      expect(decimal.test('0.10')).toBeFalsy();
+      expect(decimal.test('123.5')).toBeFalsy();
+      expect(decimal.test('123,5')).toBeFalsy();
     });
   });
 });
