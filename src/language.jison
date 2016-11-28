@@ -7,9 +7,9 @@
 "tab"                       return 'TAB'
 "alphanumeric"              return 'ALPHANUMERIC'
 "non letter"                return 'NON_WORD'
-"white space"               return 'WHITE_SPACE'
+"non space"                 return 'NON_SPACE'
 "space"                     return 'SPACE'
-(null|nothing|nil)          return 'NULL'
+"null"                      return 'NULL'
 (return|new\sline)          return 'RETURN'
 "line feed"                 return 'LINE_FEED'
 "form feed"                 return 'FORM_FEED'
@@ -21,8 +21,7 @@
 "not followed by"           return 'NOT_FOLLOWED_BY'
 "followed by"               return 'FOLLOWED_BY'
 "hex"                       return 'HEX'
-"anything"                  return 'ANYTHING'
-"control character"         return 'CONTROL_CHARACTER'
+"ctrl+"                     return 'CONTROL_CHARACTER'
 
 "group"                     return 'GROUP'
 "end group"                 return 'END_GROUP'
@@ -55,7 +54,7 @@
 (\^|caret)                  return '^'
 (\+|plus)                   return '+'
 (\-|minus)                  return '-'
-(\*|asterisk)               return '*'
+(\*|asterisk|star)          return '*'
 (\?|question\smark)         return '?'
 (\(|left\sround\sbracket)   return '('
 (\)|right\sround\sbracket)  return ')'
@@ -86,6 +85,7 @@
 "html tag"                  return 'HTML_TAG'
 "slug"                      return 'SLUG'
 "decimal"                   return 'DECIMAL'
+"anything"                  return 'ANYTHING'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'
@@ -153,8 +153,6 @@ e
         { $$ = "(?:" + $1 + ")" + $2; }
     | '"' sentence '"'
         { $$ = $2; }
-    | ANYTHING
-        { $$ = ".*"; }
     | NUMBER
     | range
     | length
@@ -275,7 +273,7 @@ specialcharacter
         { $$ = "\\W"; }
     | SPACE
         { $$ = "\\s"; }
-    | WHITE_SPACE
+    | NON_SPACE
         { $$ = "\\S"; }
     | NULL
         { $$ = "\\0"; }
@@ -346,6 +344,8 @@ helper
         { $$ = "[a-z0-9-]+"; }
     | HEX
         { $$ = "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})"; }
+    | ANYTHING
+        { $$ = ".*"; }
     ;
 
 datetime

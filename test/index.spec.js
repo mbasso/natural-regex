@@ -33,21 +33,15 @@ describe('natural-regex', () => {
       ).toEqual('/\\s/');
     });
 
-    it('white space', () => {
+    it('non space', () => {
       expect(
-        NaturalRegex.from('white space').toString()
+        NaturalRegex.from('non space').toString()
       ).toEqual('/\\S/');
     });
 
     it('null', () => {
       expect(
         NaturalRegex.from('null').toString()
-      ).toEqual('/\\0/');
-      expect(
-        NaturalRegex.from('nothing').toString()
-      ).toEqual('/\\0/');
-      expect(
-        NaturalRegex.from('nil').toString()
       ).toEqual('/\\0/');
     });
 
@@ -93,9 +87,9 @@ describe('natural-regex', () => {
       ).toEqual('/./');
     });
 
-    it('control character', () => {
+    it('ctrl+', () => {
       expect(
-        NaturalRegex.from('control character A').toString()
+        NaturalRegex.from('ctrl+A').toString()
       ).toEqual('/\\cA/');
     });
 
@@ -350,6 +344,9 @@ describe('natural-regex', () => {
       ).toEqual(compiled);
       expect(
         NaturalRegex.from('asterisk').toString()
+      ).toEqual(compiled);
+      expect(
+        NaturalRegex.from('star').toString()
       ).toEqual(compiled);
     });
 
