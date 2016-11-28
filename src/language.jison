@@ -6,7 +6,7 @@
 "vertical tab"              return 'VERTICAL_TAB'
 "tab"                       return 'TAB'
 "alphanumeric"              return 'ALPHANUMERIC'
-"non letter"                return 'NON_WORD'
+"non alphanumeric"          return 'NON_WORD'
 "non space"                 return 'NON_SPACE'
 "space"                     return 'SPACE'
 "null"                      return 'NULL'

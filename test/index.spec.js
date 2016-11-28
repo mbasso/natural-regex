@@ -21,9 +21,9 @@ describe('natural-regex', () => {
       ).toEqual('/\\v/');
     });
 
-    it('non letter', () => {
+    it('non alphanumeric', () => {
       expect(
-        NaturalRegex.from('non letter').toString()
+        NaturalRegex.from('non alphanumeric').toString()
       ).toEqual('/\\W/');
     });
 
