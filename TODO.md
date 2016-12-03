@@ -5,6 +5,7 @@
 ## SENTENCE
 
 escape " inside sentence
+Fix space into sentence
 
 ## CHARACTERS
 
