@@ -30,9 +30,8 @@
 "in charset:"               return 'CHARACTER_SET'
 
 "optional more times"       return 'OPTIONAL_REPETITION'
-"required one or more times"
-                            return 'ONE_OR_MORE_REPETITION'
-"optional one time"         return 'ZERO_OR_ONE_REPETITION'
+"one or more times"         return 'ONE_OR_MORE_REPETITION'
+"optional"                  return 'ZERO_OR_ONE_REPETITION'
 "times"                     return 'REPETITION'
 "(smallest)"                return 'SMALLEST'
 

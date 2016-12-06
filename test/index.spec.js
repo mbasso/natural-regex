@@ -208,15 +208,15 @@ describe('natural-regex', () => {
       ).toEqual('/(?:\\w)*/');
     });
 
-    it('required one or more times', () => {
+    it('one or more times', () => {
       expect(
-        NaturalRegex.from('alphanumeric required one or more times').toString()
+        NaturalRegex.from('alphanumeric one or more times').toString()
       ).toEqual('/(?:\\w)+/');
     });
 
-    it('optional one time', () => {
+    it('optional', () => {
       expect(
-        NaturalRegex.from('alphanumeric optional one time').toString()
+        NaturalRegex.from('alphanumeric optional').toString()
       ).toEqual('/(?:\\w)?/');
     });
 

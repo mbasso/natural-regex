@@ -59,7 +59,7 @@ Every release, along with the migration instructions, is documented on the Githu
 ## Authors
 **Matteo Basso**
 - [github/mbasso](https://github.com/mbasso)
-- [@Teo_Basso](https://twitter.com/Teo_Basso)
+- [@teo_basso](https://twitter.com/teo_basso)
 
 ## Copyright and License
 Copyright (c) 2016, Matteo Basso.
