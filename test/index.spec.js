@@ -201,26 +201,6 @@ describe('natural-regex', () => {
     });
   });
 
-  describe('Length', () => {
-    it('length', () => {
-      expect(
-        NaturalRegex.from('alphanumeric, length 2').toString()
-      ).toEqual('/\\w{2}/');
-    });
-
-    it('minimum length', () => {
-      expect(
-        NaturalRegex.from('alphanumeric, minimum length 2').toString()
-      ).toEqual('/\\w{2,}/');
-    });
-
-    it('length from to', () => {
-      expect(
-        NaturalRegex.from('alphanumeric, length from 2 to 10').toString()
-      ).toEqual('/\\w{2,10}/');
-    });
-  });
-
   describe('Repetition', () => {
     it('optional more times', () => {
       expect(
@@ -256,6 +236,18 @@ describe('natural-regex', () => {
       expect(
         NaturalRegex.from('alphanumeric optional more times (smallest)').toString()
       ).toEqual('/(?:\\w)*?/');
+    });
+
+    it('minimum repetition', () => {
+      expect(
+        NaturalRegex.from('alphanumeric minimum 2 times').toString()
+      ).toEqual('/(?:\\w){2,}/');
+    });
+
+    it('maximum repetition', () => {
+      expect(
+        NaturalRegex.from('alphanumeric maximum 2 times').toString()
+      ).toEqual('/(?:\\w){1,2}/');
     });
   });
 

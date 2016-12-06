@@ -36,8 +36,8 @@
 "times"                     return 'REPETITION'
 "(smallest)"                return 'SMALLEST'
 
-"minimum length"            return 'MINIMUM_LENGTH'
-"length"                    return 'LENGTH'
+"minimum"                   return 'MINIMUM'
+"maximum"                   return 'MAXIMUM'
 
 "from"                      return 'FROM'
 "to"                        return 'TO'
@@ -104,7 +104,7 @@
 /lex
 
 %left GROUP END_GROUP '.' CHARACTER_SET NOT_CHARACTER_SET '"'
-%left MINIMUM_LENGTH LENGTH FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
+%left MINIMUM MAXIMUM FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
 %left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ','
 %left STARTS_WITH
 %left OR
@@ -155,7 +155,6 @@ e
         { $$ = $2; }
     | NUMBER
     | range
-    | length
     | character
     | hexcharacter
     | specialcharacter
@@ -169,15 +168,6 @@ range
         { $$ = $2 + "-" + $4; }
     ;
 
-length
-    : LENGTH NUMBER
-        { $$ = "{" + $2 + "}"; }
-    | MINIMUM_LENGTH NUMBER
-        { $$ = "{" + $2 + ",}"; }
-    | LENGTH FROM NUMBER TO NUMBER
-        { $$ = "{" + $3 + "," + $5 +"}"; }
-    ;
-
 repetition
     : repetition SMALLEST
         { $$ = $1 + "?"; }
@@ -189,6 +179,10 @@ repetition
         { $$ = "?"; }
     | FROM NUMBER TO NUMBER REPETITION
         { $$ = "{" + $2 + "," + $4 + "}"; }
+    | MINIMUM NUMBER REPETITION
+        { $$ = "{" + $2 + ",}"; }
+    | MAXIMUM NUMBER REPETITION
+        { $$ = "{1," + $2 + "}"; }
     | FOR NUMBER REPETITION
         { $$ = "{" + $2 + "}"; }
     ;
