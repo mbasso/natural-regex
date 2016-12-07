@@ -144,17 +144,17 @@ describe('natural-regex', () => {
     it('end', () => {
       expect(
         NaturalRegex.from('starts with alphanumeric, end').toString()
-      ).toEqual('/(?:^(?:\\w))(?:$)/');
+      ).toEqual('/^(?:\\w)$/');
     });
 
     it('start', () => {
       expect(
         NaturalRegex.from('start, alphanumeric, end').toString()
-      ).toEqual('/(?:(?:^)(?:\\w))(?:$)/');
+      ).toEqual('/^\\w$/');
     });
 
     it('separators', () => {
-      const compiled = '/(?:\\w)(?:\\w)/';
+      const compiled = '/\\w\\w/';
       expect(
         NaturalRegex.from('alphanumeric, alphanumeric').toString()
       ).toEqual(compiled);
@@ -163,7 +163,7 @@ describe('natural-regex', () => {
       ).toEqual(compiled);
       expect(
         NaturalRegex.from('alphanumeric.').toString()
-      ).toEqual('/(?:\\w)/');
+      ).toEqual('/\\w/');
       expect(
         NaturalRegex.from('alphanumeric then alphanumeric').toString()
       ).toEqual(compiled);
@@ -180,12 +180,12 @@ describe('natural-regex', () => {
     it('group', () => {
       expect(
         NaturalRegex.from('group from a to z end group').toString()
-      ).toEqual('/(a-z)/');
+      ).toEqual('/([a-z])/');
     });
     it('group with "."', () => {
       expect(
         NaturalRegex.from('from a to z.').toString()
-      ).toEqual('/(?:a-z)/');
+      ).toEqual('/[a-z]/');
     });
 
     it('Charset', () => {
@@ -205,49 +205,49 @@ describe('natural-regex', () => {
     it('optional more times', () => {
       expect(
         NaturalRegex.from('alphanumeric optional more times').toString()
-      ).toEqual('/(?:\\w)*/');
+      ).toEqual('/\\w*/');
     });
 
     it('one or more times', () => {
       expect(
         NaturalRegex.from('alphanumeric one or more times').toString()
-      ).toEqual('/(?:\\w)+/');
+      ).toEqual('/\\w+/');
     });
 
     it('optional', () => {
       expect(
         NaturalRegex.from('alphanumeric optional').toString()
-      ).toEqual('/(?:\\w)?/');
+      ).toEqual('/\\w?/');
     });
 
     it('from to times', () => {
       expect(
         NaturalRegex.from('alphanumeric from 1 to 7 times').toString()
-      ).toEqual('/(?:\\w){1,7}/');
+      ).toEqual('/\\w{1,7}/');
     });
 
     it('for 7 times', () => {
       expect(
         NaturalRegex.from('alphanumeric for 7 times').toString()
-      ).toEqual('/(?:\\w){7}/');
+      ).toEqual('/\\w{7}/');
     });
 
     it('smallest', () => {
       expect(
         NaturalRegex.from('alphanumeric optional more times (smallest)').toString()
-      ).toEqual('/(?:\\w)*?/');
+      ).toEqual('/\\w*?/');
     });
 
     it('minimum repetition', () => {
       expect(
         NaturalRegex.from('alphanumeric minimum 2 times').toString()
-      ).toEqual('/(?:\\w){2,}/');
+      ).toEqual('/\\w{2,}/');
     });
 
     it('maximum repetition', () => {
       expect(
         NaturalRegex.from('alphanumeric maximum 2 times').toString()
-      ).toEqual('/(?:\\w){1,2}/');
+      ).toEqual('/\\w{1,2}/');
     });
   });
 
@@ -261,22 +261,22 @@ describe('natural-regex', () => {
     it('followed by', () => {
       expect(
         NaturalRegex.from('alphanumeric followed by digit').toString()
-      ).toEqual('/(?:\\w)(?=\\d)/');
+      ).toEqual('/\\w(?=\\d)/');
     });
 
     it('not followed by', () => {
       expect(
         NaturalRegex.from('alphanumeric not followed by digit').toString()
-      ).toEqual('/(?:\\w)(?!\\d)/');
+      ).toEqual('/\\w(?!\\d)/');
     });
 
     it('range', () => {
       expect(
         NaturalRegex.from('from a to z').toString()
-      ).toEqual('/a-z/');
+      ).toEqual('/[a-z]/');
       expect(
         NaturalRegex.from('from 0 to 9').toString()
-      ).toEqual('/0-9/');
+      ).toEqual('/[0-9]/');
     });
   });
 
@@ -579,7 +579,7 @@ describe('natural-regex', () => {
       const word = NaturalRegex.from('starts with word, end');
       expect(
         word.toString()
-      ).toEqual('/(?:^(?:[a-zA-Z]+))(?:$)/');
+      ).toEqual('/^(?:[a-zA-Z]+)$/');
       expect(word.test('FOO')).toBeTruthy();
       expect(word.test('foo')).toBeTruthy();
       expect(word.test('1')).toBeFalsy();
@@ -590,7 +590,7 @@ describe('natural-regex', () => {
       const word = NaturalRegex.from('starts with lowercase word, end');
       expect(
         word.toString()
-      ).toEqual('/(?:^(?:[a-z]+))(?:$)/');
+      ).toEqual('/^(?:[a-z]+)$/');
       expect(word.test('FOO')).toBeFalsy();
       expect(word.test('foo')).toBeTruthy();
       expect(word.test('1')).toBeFalsy();
@@ -601,7 +601,7 @@ describe('natural-regex', () => {
       const word = NaturalRegex.from('starts with uppercase word, end');
       expect(
         word.toString()
-      ).toEqual('/(?:^(?:[A-Z]+))(?:$)/');
+      ).toEqual('/^(?:[A-Z]+)$/');
       expect(word.test('FOO')).toBeTruthy();
       expect(word.test('foo')).toBeFalsy();
       expect(word.test('1')).toBeFalsy();
@@ -612,7 +612,7 @@ describe('natural-regex', () => {
       const number = NaturalRegex.from('starts with number, end');
       expect(
         number.toString()
-      ).toEqual('/(?:^(?:\\-?[0-9]+))(?:$)/');
+      ).toEqual('/^(?:\\-?[0-9]+)$/');
       expect(number.test('foo')).toBeFalsy();
       expect(number.test('1')).toBeTruthy();
       expect(number.test('-1')).toBeTruthy();
@@ -624,7 +624,7 @@ describe('natural-regex', () => {
       const number = NaturalRegex.from('starts with positive number, end');
       expect(
         number.toString()
-      ).toEqual('/(?:^(?:[0-9]+))(?:$)/');
+      ).toEqual('/^(?:[0-9]+)$/');
       expect(number.test('foo')).toBeFalsy();
       expect(number.test('1')).toBeTruthy();
       expect(number.test('-1')).toBeFalsy();
@@ -636,7 +636,7 @@ describe('natural-regex', () => {
       const number = NaturalRegex.from('starts with negative number, end');
       expect(
         number.toString()
-      ).toEqual('/(?:^(?:\\-[0-9]+))(?:$)/');
+      ).toEqual('/^(?:\\-[0-9]+)$/');
       expect(number.test('foo')).toBeFalsy();
       expect(number.test('1')).toBeFalsy();
       expect(number.test('-1')).toBeTruthy();
@@ -650,7 +650,7 @@ describe('natural-regex', () => {
         expect(
           date.toString()
           //eslint-disable-next-line
-        ).toEqual('/(?:^(?:(?:(?:31(\\/|-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2})))(?:$)/');
+        ).toEqual('/^(?:(?:(?:31(\\/|-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2}))$/');
         expect(date.test('01/01/1900')).toBeTruthy();
         expect(date.test('01-01-1900')).toBeTruthy();
         expect(date.test('01.01.1900')).toBeFalsy();
@@ -771,7 +771,7 @@ describe('natural-regex', () => {
       expect(
         email.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})))(?:$)/');
+      ).toEqual('/^(?:([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6}))$/');
       expect(email.test('foo@bar.com')).toBeTruthy();
       expect(email.test('foo@bar.loremipsum')).toBeFalsy();
       expect(email.test('foo@bar')).toBeFalsy();
@@ -784,7 +784,7 @@ describe('natural-regex', () => {
       expect(
         url.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?))(?:$)/');
+      ).toEqual('/^(?:(https?:\\/\\/)?([\\da-z\\.-]+)\\.([a-z\\.]{2,6})([\\/\\w \\.-]*)*\\/?)$/');
       expect(url.test('http://foo.bar/lorem')).toBeTruthy();
       expect(url.test('https://foo.bar/lorem.exp')).toBeTruthy();
       expect(url.test('foo.bar/lorem')).toBeTruthy();
@@ -799,7 +799,7 @@ describe('natural-regex', () => {
       expect(
         ipAddress.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)))(?:$)/');
+      ).toEqual('/^(?:(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$/');
       expect(ipAddress.test('73.60.124.136')).toBeTruthy();
       expect(ipAddress.test('255.255.255.255')).toBeTruthy();
       expect(ipAddress.test('256.60.124.136')).toBeFalsy();
@@ -813,7 +813,7 @@ describe('natural-regex', () => {
       expect(
         htmlTag.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\\/>)))(?:$)/');
+      ).toEqual('/^(?:<([a-z]+)([^<]+)*(?:>(.*)<\\/\\1>|\\s+\\/>))$/');
       expect(htmlTag.test('<div></div>')).toBeTruthy();
       expect(htmlTag.test('<img src="foo.png" />')).toBeTruthy();
       expect(htmlTag.test('<div><img src="foo.png" /></div>')).toBeTruthy();
@@ -825,7 +825,7 @@ describe('natural-regex', () => {
       expect(
         slug.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:[a-z0-9-]+))(?:$)/');
+      ).toEqual('/^(?:[a-z0-9-]+)$/');
       expect(slug.test('foo-bar')).toBeTruthy();
       expect(slug.test('foo')).toBeTruthy();
       expect(slug.test('foo_bar')).toBeFalsy();
@@ -836,7 +836,7 @@ describe('natural-regex', () => {
       expect(
         hex.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})))(?:$)/');
+      ).toEqual('/^(?:#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3}))$/');
       expect(hex.test('#AF32B3')).toBeTruthy();
       expect(hex.test('#AF3')).toBeTruthy();
       expect(hex.test('#1234567')).toBeFalsy();
@@ -848,7 +848,7 @@ describe('natural-regex', () => {
       expect(
         decimal.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:\\-?\\d+(?:\\.\\d{0,2})?))(?:$)/');
+      ).toEqual('/^(?:\\-?\\d+(?:\\.\\d{0,2})?)$/');
       expect(decimal.test('10')).toBeTruthy();
       expect(decimal.test('-10')).toBeTruthy();
       expect(decimal.test('0.10')).toBeTruthy();
@@ -861,7 +861,7 @@ describe('natural-regex', () => {
       expect(
         decimal.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:\\d+(?:\\.\\d{0,2})?))(?:$)/');
+      ).toEqual('/^(?:\\d+(?:\\.\\d{0,2})?)$/');
       expect(decimal.test('10')).toBeTruthy();
       expect(decimal.test('-10')).toBeFalsy();
       expect(decimal.test('0.10')).toBeTruthy();
@@ -874,7 +874,7 @@ describe('natural-regex', () => {
       expect(
         decimal.toString()
         //eslint-disable-next-line
-      ).toEqual('/(?:^(?:\\-\\d+(?:\\.\\d{0,2})?))(?:$)/');
+      ).toEqual('/^(?:\\-\\d+(?:\\.\\d{0,2})?)$/');
       expect(decimal.test('10')).toBeFalsy();
       expect(decimal.test('-10')).toBeTruthy();
       expect(decimal.test('0.10')).toBeFalsy();
