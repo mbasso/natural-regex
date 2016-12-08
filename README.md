@@ -53,7 +53,7 @@ Visit the [Wiki](https://github.com/mbasso/natural-regex/wiki) for the full docu
 
 ## Examples
 
-Examples can be found [here](https://github.com/mbasso/natural-regex/wiki/Examples);
+Examples can be found [here](https://github.com/mbasso/natural-regex/wiki/Examples)
 
 ## Change Log
 
