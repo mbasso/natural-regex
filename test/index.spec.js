@@ -132,6 +132,21 @@ describe('natural-regex', () => {
       expect(NaturalRegex).toBeA('function');
       expect(NaturalRegex.parser).toBeA(Object);
     });
+
+    it('should replace', () => {
+      let newString = NaturalRegex.replace({
+        string: 'foo is awesome, foo!',
+        match: 'starts with "foo"',
+        replace: 'bar',
+      });
+      expect(newString).toEqual('bar is awesome, foo!');
+      newString = NaturalRegex.replace({
+        string: '08/12/2014',
+        match: '/, year',
+        replace: '/2016',
+      });
+      expect(newString).toEqual('08/12/2016');
+    });
   });
 
   describe('Start and End', () => {
