@@ -53,6 +53,7 @@
 (\^|caret)                  return '^'
 (\+|plus)                   return '+'
 (\-|minus)                  return '-'
+(_|underscore)              return '_'
 (\*|asterisk|star)          return '*'
 (\?|question\smark)         return '?'
 (\(|left\sround\sbracket)   return '('
@@ -214,6 +215,8 @@ character
 
 simplecharacter
     : CHARACTER
+    | '_'
+        { $$ = "_"; }
     | ';'
         { $$ = ";"; }
     | '-'

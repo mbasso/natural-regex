@@ -538,6 +538,18 @@ describe('natural-regex', () => {
       expect(backslash.test('\\')).toBeTruthy();
     });
 
+    it('_', () => {
+      let underscore = NaturalRegex.from('_');
+      expect(
+        underscore.toString()
+      ).toEqual('/_/');
+      underscore = NaturalRegex.from('underscore');
+      expect(
+        underscore.toString()
+      ).toEqual('/_/');
+      expect(underscore.test('_')).toBeTruthy();
+    });
+
     it('-', () => {
       let minus = NaturalRegex.from('-');
       expect(
