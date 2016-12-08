@@ -51,6 +51,10 @@ NaturalRegex also includes a [command line tool](https://github.com/mbasso/natur
 
 Visit the [Wiki](https://github.com/mbasso/natural-regex/wiki) for the full documentation.
 
+## Examples
+
+Examples can be found [here](https://github.com/mbasso/natural-regex/wiki/Examples);
+
 ## Change Log
 
 This project adheres to [Semantic Versioning](http://semver.org/).  
