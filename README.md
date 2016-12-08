@@ -35,14 +35,18 @@ Once you have installed natural-regex, supposing a CommonJS environment, you can
 
 ```js
 import NaturalRegex from 'natural-regex';
-// you can create regular expressions using our helpers
+// validate string
 const dateAndEmail = NaturalRegex.from('starts with dd/MM/yyyy, space, minus, space and then email, end.');
 dateAndEmail.test('06/07/2016 - foo@bar.com'); // this evaluates true
 dateAndEmail.test('Foo Bar foo@bar'); // this evaluates false
-// or from scratch
-const LoremFooOrBar = NaturalRegex.from('starts with "Lorem", then space and then "foo" or "bar"');
-LoremFooOrBar.test('Lorem bar'); // this evaluates true
-LoremFooOrBar.test('Lorem text'); // this evaluates false
+
+// replace in string
+NaturalRegex.replace({
+  string: '06/07/2014 - foo@bar.com',
+  match: 'yyyy',
+  replace: '2016',
+});
+// this returns '06/07/2016 - foo@bar.com'
 ```
 
 NaturalRegex also includes a [command line tool](https://github.com/mbasso/natural-regex-cli), check [this](https://github.com/mbasso/natural-regex/wiki/Cli) for more information.
