@@ -109,6 +109,9 @@ describe('natural-regex', () => {
       expect(
         NaturalRegex.from('hex 43').toString()
       ).toEqual('/\\x43/');
+      expect(
+        () => NaturalRegex.from('hex 4x')
+      ).toThrow();
     });
   });
 
@@ -241,10 +244,10 @@ describe('natural-regex', () => {
       ).toEqual('/\\w{1,7}/');
     });
 
-    it('for 7 times', () => {
+    it('for 14 times', () => {
       expect(
-        NaturalRegex.from('alphanumeric for 7 times').toString()
-      ).toEqual('/\\w{7}/');
+        NaturalRegex.from('alphanumeric for 14 times').toString()
+      ).toEqual('/\\w{14}/');
     });
 
     it('smallest', () => {

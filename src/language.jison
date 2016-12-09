@@ -96,7 +96,7 @@
 "yy"                        return 'yy'
 (yyyy|year)                 return 'YEAR'
 
-[0-9]+                      return 'NUMBER'
+[0-9]                       return 'NUMBER'
 
 <<EOF>>                     return 'EOF'
 .                           return 'CHARACTER'
@@ -156,7 +156,7 @@ e
         { $$ = $2; }
     | range
         { $$ = "[" + $1 + "]" }
-    | NUMBER
+    | number
     | character
     | hexcharacter
     | specialcharacter
@@ -166,7 +166,7 @@ e
 range
     : FROM character TO character
         { $$ = $2 + "-" + $4; }
-    | FROM NUMBER TO NUMBER
+    | FROM number TO number
         { $$ = $2 + "-" + $4; }
     ;
 
@@ -179,13 +179,13 @@ repetition
         { $$ = "+"; }
     | ZERO_OR_ONE_REPETITION
         { $$ = "?"; }
-    | FROM NUMBER TO NUMBER REPETITION
+    | FROM number TO number REPETITION
         { $$ = "{" + $2 + "," + $4 + "}"; }
-    | MINIMUM NUMBER REPETITION
+    | MINIMUM number REPETITION
         { $$ = "{" + $2 + ",}"; }
-    | MAXIMUM NUMBER REPETITION
+    | MAXIMUM number REPETITION
         { $$ = "{1," + $2 + "}"; }
-    | FOR NUMBER REPETITION
+    | FOR number REPETITION
         { $$ = "{" + $2 + "}"; }
     ;
 
@@ -296,12 +296,21 @@ specialcharacter
     ;
 
 hexcharacter
-    : HEX CHARACTER CHARACTER
+    : HEX hexvalue hexvalue
         { $$ = "\\x" + $2 + $3; }
-    | HEX CHARACTER CHARACTER CHARACTER CHARACTER
+    | HEX hexvalue hexvalue hexvalue hexvalue
         { $$ = "\\u" + $2 + $3 + $4 + $5; }
-    | HEX NUMBER
-        { $$ = "\\x" + $2; }
+    ;
+
+hexvalue
+    : NUMBER
+    | CHARACTER
+        {
+            if (!/[a-fA-F]/.test(yytext)) {
+                throw new Error('Invalid hex value');
+            }
+            $$ = $1;
+        }
     ;
 
 helper
@@ -381,4 +390,11 @@ time
         { $$ = "(?:0[0-9]|[1-5][0-9])"; }
     | SECONDS
         { $$ = "(?:0[0-9]|[1-5][0-9])"; }
+    ;
+
+number
+    : NUMBER number
+        { $$ = String($1) + $2; }
+    | NUMBER
+        { $$ = $1; }
     ;
