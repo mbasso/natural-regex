@@ -85,6 +85,7 @@
 "html tag"                  return 'HTML_TAG'
 "slug"                      return 'SLUG'
 "decimal"                   return 'DECIMAL'
+"locale"                    return 'LOCALE'
 "anything"                  return 'ANYTHING'
 
 (hh|hours)                  return 'HOURS'
@@ -341,6 +342,8 @@ helper
         { $$ = "[a-z0-9-]+"; }
     | HEX
         { $$ = "#?([a-fA-F0-9]{6}|[a-fA-F0-9]{3})"; }
+    | LOCALE
+        { $$ = "[a-z]{2}(?:-[A-Z]{2})?"; }
     | ANYTHING
         { $$ = ".*"; }
     ;

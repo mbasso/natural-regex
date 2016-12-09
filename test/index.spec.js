@@ -908,5 +908,17 @@ describe('natural-regex', () => {
       expect(decimal.test('123.5')).toBeFalsy();
       expect(decimal.test('123,5')).toBeFalsy();
     });
+
+    it('locale', () => {
+      const locale = NaturalRegex.from('start, locale, end');
+      expect(
+        locale.toString()
+        //eslint-disable-next-line
+      ).toEqual('/^[a-z]{2}(?:-[A-Z]{2})?$/');
+      expect(locale.test('it')).toBeTruthy();
+      expect(locale.test('it-IT')).toBeTruthy();
+      expect(locale.test('it-it')).toBeFalsy();
+      expect(locale.test('i')).toBeFalsy();
+    });
   });
 });
