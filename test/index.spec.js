@@ -170,16 +170,22 @@ describe('natural-regex', () => {
       ).toEqual('/^(?:\\w)/');
     });
 
-    it('end', () => {
+    it('ends with', () => {
       expect(
-        NaturalRegex.from('starts with alphanumeric, end').toString()
-      ).toEqual('/^(?:\\w)$/');
+        NaturalRegex.from('ends with alphanumeric').toString()
+      ).toEqual('/\\w$/');
     });
 
     it('start', () => {
       expect(
         NaturalRegex.from('start, alphanumeric, end').toString()
       ).toEqual('/^\\w$/');
+    });
+
+    it('end', () => {
+      expect(
+        NaturalRegex.from('starts with alphanumeric, end').toString()
+      ).toEqual('/^(?:\\w)$/');
     });
 
     it('separators', () => {

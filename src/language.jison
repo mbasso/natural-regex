@@ -20,6 +20,7 @@
 "backspace"                 return 'BACKSPACE'
 "any character"             return 'ANY_CHARACTER'
 "starts with"               return 'STARTS_WITH'
+"ends with"                 return 'ENDS_WITH'
 "not followed by"           return 'NOT_FOLLOWED_BY'
 "followed by"               return 'FOLLOWED_BY'
 "hex"                       return 'HEX'
@@ -109,7 +110,7 @@
 %left GROUP END_GROUP '.' CHARACTER_SET NOT_CHARACTER_SET '"'
 %left MINIMUM MAXIMUM FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
 %left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ','
-%left STARTS_WITH
+%left STARTS_WITH ENDS_WITH
 %left OR
 
 %start file
@@ -140,6 +141,8 @@ e
         { $$ = $1 + $4; }
     | STARTS_WITH e
         { $$ = "^(?:" + $2 + ")"; }
+    | ENDS_WITH e
+        { $$ = $2 + "$"; }
     | GROUP e END_GROUP
         { $$ = "(" + $2 + ")"; }
     | CHARACTER_SET charset ';'
