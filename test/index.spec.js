@@ -93,10 +93,21 @@ describe('natural-regex', () => {
       ).toEqual('/\\cA/');
     });
 
-    it('sentence', () => {
+    it('word', () => {
       expect(
-        NaturalRegex.from('"Ciao"').toString()
-      ).toEqual('/Ciao/');
+        NaturalRegex.from('foo77bar').toString()
+      ).toEqual('/foo77bar/');
+    });
+
+    it('escape', () => {
+      const escape = NaturalRegex.from('"underscore \\"test\\"", foo, "');
+      expect(
+        escape.toString()
+      ).toEqual('/underscore\\s\\"test\\"foo\\"/');
+      expect(escape.test('underscore "test"foo"')).toBeTruthy();
+      expect(escape.test('underscore "test"foo')).toBeFalsy();
+      expect(escape.test('underscore"test"foo"')).toBeFalsy();
+      expect(escape.test('underscore test"foo"')).toBeFalsy();
     });
 
     it('hex', () => {
@@ -139,7 +150,7 @@ describe('natural-regex', () => {
     it('should replace', () => {
       let newString = NaturalRegex.replace({
         string: 'foo is awesome, foo!',
-        match: 'starts with "foo"',
+        match: 'starts with foo',
         replace: 'bar',
       });
       expect(newString).toEqual('bar is awesome, foo!');

@@ -3,6 +3,8 @@
 
 \s+                         /* skip whitespace */
 
+(?:\"(?:\\\"|.)*?\")        return 'ESCAPED'
+
 "vertical tab"              return 'VERTICAL_TAB'
 "tab"                       return 'TAB'
 "alphanumeric"              return 'ALPHANUMERIC'
@@ -152,14 +154,18 @@ e
         { $$ = $1 + "(?!" + $3 + ")"; }
     | e repetition
         { $$ = $1 + $2; }
-    | '"' sentence '"'
-        { $$ = $2; }
     | range
         { $$ = "[" + $1 + "]" }
-    | number
-    | character
+    | ESCAPED
+        {
+          $$ = yytext
+                    .substring(1, yytext.length - 1)
+                    .replace(/\s/g, '\\s');
+        }
+    | separatorcharacter
     | hexcharacter
     | specialcharacter
+    | word
     | helper
     ;
 
@@ -189,10 +195,13 @@ repetition
         { $$ = "{" + $2 + "}"; }
     ;
 
-sentence
-    : character
-    | character sentence
+word
+    : simplecharacter
+    | NUMBER
+    | simplecharacter word
         { $$ = $1 + $2 }
+    | NUMBER word
+        { $$ = String($1) + $2 }
     ;
 
 charset
@@ -208,7 +217,11 @@ charset
 
 character
     : simplecharacter
-    | '.'
+    | separators
+    ;
+
+separatorcharacter
+    : '.'
         { $$ = "\\."; }
     | ','
         { $$ = "\\,"; }
