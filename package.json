@@ -12,7 +12,7 @@
   ],
   "scripts": {
     "clean": "rimraf lib dist es .nyc_output src/language.js",
-    "compile:jison": "cd src && jison language.jison && cd ..",
+    "compile:jison": "cd src && jison language.jison language.jisonlex && cd ..",
     "test": "npm run compile:jison && cross-env BABEL_ENV=commonjs nyc --require babel-register mocha --recursive",
     "test:watch": "npm test -- --watch",
     "test:cov": "nyc report --reporter=text-lcov | coveralls",
