@@ -19,9 +19,6 @@
 	- ssn
 	- credit card
 
-## FIX
-	- newline and carriage return
-
 ## DOCUMENTATION
 
 - Operands

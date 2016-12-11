@@ -334,16 +334,23 @@ describe('Operands', () => {
     ).toEqual('/\\0/');
   });
 
-  it('newline, return', () => {
+  it('return', () => {
     expect(
       NaturalRegex.from('return').toString()
     ).toEqual('/\\r/');
   });
 
-  it('line feed', () => {
+  it('newline, line feed', () => {
+    const compiled = '/\\n/';
     expect(
       NaturalRegex.from('line feed').toString()
-    ).toEqual('/\\n/');
+    ).toEqual(compiled);
+    expect(
+      NaturalRegex.from('newline').toString()
+    ).toEqual(compiled);
+    expect(
+      NaturalRegex.from('new line').toString()
+    ).toEqual(compiled);
   });
 
   it('form feed', () => {
