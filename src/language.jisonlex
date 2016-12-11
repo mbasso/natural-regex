@@ -27,6 +27,8 @@
 
 "group"                     return 'GROUP'
 "end group"                 return 'END_GROUP'
+"capture"                   return 'CAPTURE'
+"end capture"               return 'END_CAPTURE'
 
 "not in charset:"           return 'NOT_CHARACTER_SET'
 "in charset:"               return 'CHARACTER_SET'

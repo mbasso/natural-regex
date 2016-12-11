@@ -1,4 +1,4 @@
-%left GROUP END_GROUP '.' CHARACTER_SET NOT_CHARACTER_SET '"'
+%left GROUP END_GROUP CAPTURE END_CAPTURE '.' CHARACTER_SET NOT_CHARACTER_SET '"'
 %left MINIMUM MAXIMUM FROM TO FOR REPETITION OPTIONAL_REPETITION ONE_OR_MORE_REPETITION ZERO_OR_ONE_REPETITION
 %left FOLLOWED_BY NOT_FOLLOWED_BY AND THEN ','
 %left STARTS_WITH ENDS_WITH
@@ -35,6 +35,8 @@ e
     | ENDS_WITH e
         { $$ = $2 + "$"; }
     | GROUP e END_GROUP
+        { $$ = "(?:" + $2 + ")"; }
+    | CAPTURE e END_CAPTURE
         { $$ = "(" + $2 + ")"; }
     | CHARACTER_SET charset ';'
         { $$ = "[" + $2 + "]"; }

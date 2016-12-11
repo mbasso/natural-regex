@@ -129,6 +129,12 @@ describe('Operators', () => {
     it('group', () => {
       expect(
         NaturalRegex.from('group from a to z end group').toString()
+      ).toEqual('/(?:[a-z])/');
+    });
+
+    it('capture', () => {
+      expect(
+        NaturalRegex.from('capture from a to z end capture').toString()
       ).toEqual('/([a-z])/');
     });
   });

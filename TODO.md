@@ -1,9 +1,5 @@
 ## DEVELOPMENT
 
-- Operators
-	- capture ... end capture
-		same as group but reminding the group (() vs (?:))
-
 - Helpers
 	- US ZIP Code
 	- Canadian postal code
@@ -32,6 +28,7 @@
 	- range
 
 - Operators
+	- capture ... end capture
 	- followed by
 	- not followed by
 	- (smallest)
