@@ -20,7 +20,7 @@
 	- credit card
 
 ## FIX
-	- email helper is wrong, see Mail::RFC822::Address
+	- newline and carriage return
 
 ## DOCUMENTATION
 

@@ -192,15 +192,11 @@ describe('Helpers', () => {
 
     it('email', () => {
       const email = NaturalRegex.from('starts with email, end');
-      expect(
-        email.toString()
-        //eslint-disable-next-line
-      ).toEqual('/^(?:([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6}))$/');
       expect(email.test('foo@bar.com')).toBeTruthy();
-      expect(email.test('foo@bar.loremipsum')).toBeFalsy();
-      expect(email.test('foo@bar')).toBeFalsy();
-      expect(email.test('01.01.1900')).toBeFalsy();
-      expect(email.test('32/07/1900')).toBeFalsy();
+      expect(email.test('foo@bar.loremipsum')).toBeTruthy();
+      expect(email.test('foo@bar')).toBeTruthy();
+      expect(email.test('foo@')).toBeFalsy();
+      expect(email.test('@foo')).toBeFalsy();
     });
 
     it('locale', () => {
@@ -242,10 +238,6 @@ describe('Helpers', () => {
   describe('date', () => {
     it('date', () => {
       const date = NaturalRegex.from('starts with date, end');
-      expect(
-        date.toString()
-        //eslint-disable-next-line
-      ).toEqual('/^(?:(?:(?:31(\\/|-)(?:0?[13578]|1[02]))\\1|(?:(?:29|30)(\\/|-)(?:0?[1,3-9]|1[0-2])\\2))(?:(?:1[6-9]|[2-9]\\d)?\\d{2})$|^(?:29(\\/|-)0?2\\3(?:(?:(?:1[6-9]|[2-9]\\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\\d|2[0-8])(\\/|-)(?:(?:0?[1-9])|(?:1[0-2]))\\4(?:(?:1[6-9]|[2-9]\\d)?\\d{2}))$/');
       expect(date.test('01/01/1900')).toBeTruthy();
       expect(date.test('01-01-1900')).toBeTruthy();
       expect(date.test('01.01.1900')).toBeFalsy();
