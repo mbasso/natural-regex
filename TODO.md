@@ -4,7 +4,6 @@
 	- US ZIP Code
 	- Canadian postal code
 	- UK postal code
-	- mac address
 	- IPv4
 		current ip address
 	- IPv6
@@ -29,6 +28,9 @@
 	- followed by
 	- not followed by
 	- (smallest)
+
+- Helpers
+	- mac address
 
 ## WIKI
 

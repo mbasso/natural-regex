@@ -175,6 +175,14 @@ describe('Helpers', () => {
       expect(ipAddress.test('32/07/1900')).toBeFalsy();
     });
 
+    it('mac address', () => {
+      const macAddress = NaturalRegex.from('starts with mac address, end');
+      expect(macAddress.test('3D:F2:C9:A6:B3:4F')).toBeTruthy();
+      expect(macAddress.test('3D-F2-C9-A6-B3-4F')).toBeTruthy();
+      expect(macAddress.test('3Z-F2-C9-A6-X3-4F')).toBeFalsy();
+      expect(macAddress.test('3D.F2.C9.A6.B3.4F')).toBeFalsy();
+    });
+
     it('url', () => {
       const url = NaturalRegex.from('starts with url, end');
       expect(

@@ -86,6 +86,7 @@
 "email"                     return 'EMAIL'
 "url"                       return 'URL'
 "ip address"                return 'IP_ADDRESS'
+"mac address"								return 'MAC_ADDRESS'
 "html tag"                  return 'HTML_TAG'
 "slug"                      return 'SLUG'
 "decimal"                   return 'DECIMAL'
