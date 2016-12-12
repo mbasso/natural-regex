@@ -269,6 +269,13 @@ describe('Helpers', () => {
       expect(longitude.test('.123456')).toBeFalsy();
       expect(longitude.test('180.')).toBeFalsy();
     });
+
+    it('color name', () => {
+      const slug = NaturalRegex.from('color name');
+      expect(slug.test('white')).toBeTruthy();
+      expect(slug.test('blue')).toBeTruthy();
+      expect(slug.test('foo')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

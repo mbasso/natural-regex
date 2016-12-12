@@ -94,6 +94,7 @@
 "anything"                  return 'ANYTHING'
 "latitude"									return 'LATITUDE'
 "longitude"									return 'LONGITUDE'
+"color name"								return 'COLOR_NAME'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'
