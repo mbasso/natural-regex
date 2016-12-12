@@ -241,6 +241,34 @@ describe('Helpers', () => {
       expect(hex.test('#1234567')).toBeFalsy();
       expect(hex.test('#ZZZZZZ')).toBeFalsy();
     });
+
+    it('latitude', () => {
+      const latitude = NaturalRegex.from('starts with latitude, end');
+      expect(latitude.test('+90.0')).toBeTruthy();
+      expect(latitude.test('-90.000')).toBeTruthy();
+      expect(latitude.test('45')).toBeTruthy();
+      expect(latitude.test('-90')).toBeTruthy();
+      expect(latitude.test('+90')).toBeTruthy();
+      expect(latitude.test('47.1231231')).toBeTruthy();
+      expect(latitude.test('-90.')).toBeFalsy();
+      expect(latitude.test('-91')).toBeFalsy();
+      expect(latitude.test('+90.1')).toBeFalsy();
+      expect(latitude.test('045')).toBeFalsy();
+    });
+
+    it('longitude', () => {
+      const longitude = NaturalRegex.from('starts with longitude, end');
+      expect(longitude.test('-127.554334')).toBeTruthy();
+      expect(longitude.test('180')).toBeTruthy();
+      expect(longitude.test('-180')).toBeTruthy();
+      expect(longitude.test('-180.0000')).toBeTruthy();
+      expect(longitude.test('+180')).toBeTruthy();
+      expect(longitude.test('179.99999999')).toBeTruthy();
+      expect(longitude.test('-190.')).toBeFalsy();
+      expect(longitude.test('200.111')).toBeFalsy();
+      expect(longitude.test('.123456')).toBeFalsy();
+      expect(longitude.test('180.')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

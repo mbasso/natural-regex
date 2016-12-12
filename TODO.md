@@ -11,8 +11,6 @@
 		change from current to (IPv4|IPv6)
 	- phone number
 	- address
-	- latitude
-	- longitude
 	- named colour
 	- iban
 	- ssn
@@ -31,6 +29,8 @@
 
 - Helpers
 	- mac address
+	- latitude
+	- longitude
 
 ## WIKI
 

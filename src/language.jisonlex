@@ -92,6 +92,8 @@
 "decimal"                   return 'DECIMAL'
 "locale"                    return 'LOCALE'
 "anything"                  return 'ANYTHING'
+"latitude"									return 'LATITUDE'
+"longitude"									return 'LONGITUDE'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'
