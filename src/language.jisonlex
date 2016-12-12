@@ -95,6 +95,7 @@
 "latitude"									return 'LATITUDE'
 "longitude"									return 'LONGITUDE'
 "color name"								return 'COLOR_NAME'
+"hostname"									return 'HOSTNAME'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'

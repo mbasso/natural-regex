@@ -271,10 +271,17 @@ describe('Helpers', () => {
     });
 
     it('color name', () => {
-      const slug = NaturalRegex.from('color name');
-      expect(slug.test('white')).toBeTruthy();
-      expect(slug.test('blue')).toBeTruthy();
-      expect(slug.test('foo')).toBeFalsy();
+      const colorName = NaturalRegex.from('color name');
+      expect(colorName.test('white')).toBeTruthy();
+      expect(colorName.test('blue')).toBeTruthy();
+      expect(colorName.test('foo')).toBeFalsy();
+    });
+
+    it('hostname', () => {
+      const hostName = NaturalRegex.from('start, hostname, end');
+      expect(hostName.test('example.org')).toBeTruthy();
+      expect(hostName.test('www.foo.bar')).toBeTruthy();
+      expect(hostName.test('foo.')).toBeFalsy();
     });
   });
 

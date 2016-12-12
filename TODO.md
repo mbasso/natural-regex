@@ -31,6 +31,7 @@
 	- latitude
 	- longitude
 	- color name
+	- hostname
 
 ## WIKI
 
