@@ -96,6 +96,7 @@
 "longitude"									return 'LONGITUDE'
 "color name"								return 'COLOR_NAME'
 "hostname"									return 'HOSTNAME'
+([gu]uid)										return 'GUID'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'

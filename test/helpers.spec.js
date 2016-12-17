@@ -283,6 +283,21 @@ describe('Helpers', () => {
       expect(hostName.test('www.foo.bar')).toBeTruthy();
       expect(hostName.test('foo.')).toBeFalsy();
     });
+
+    it('guid', () => {
+      expect(
+        NaturalRegex.from('guid').toString()
+      ).toEqual(NaturalRegex.from('uuid').toString());
+      const uuid = NaturalRegex.from('start, guid, end');
+      expect(uuid.test('53fa9fa7-7b71-41c1-bb5b-306f4bf25aa4')).toBeTruthy();
+      expect(uuid.test('53FA9FA7-7B71-41C1-BB5B-306F4BF25AA4')).toBeTruthy();
+      expect(uuid.test('00000000-0000-0000-0000-000000000000')).toBeTruthy();
+      expect(uuid.test('53fa9fa7-7b71-61c1-bb5b-306f4bf25aa4')).toBeFalsy();
+      expect(uuid.test('53fa9fa7-7b71-41c1-xb5b-306f4bf25aa4')).toBeFalsy();
+      expect(uuid.test('000000j-0000-0000-0000-000000000000')).toBeFalsy();
+      expect(uuid.test('0000000-0000-0000-0000-000000000000')).toBeFalsy();
+      expect(uuid.test('{0000000-0000-0000-0000-000000000000}')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

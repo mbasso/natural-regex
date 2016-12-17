@@ -14,6 +14,9 @@
 	- iban
 	- ssn
 	- credit card
+	- Xml
+	- Json
+	- File path
 
 ## DOCUMENTATION
 
@@ -32,6 +35,7 @@
 	- longitude
 	- color name
 	- hostname
+	- guid, uuid
 
 ## WIKI
 
