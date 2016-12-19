@@ -85,6 +85,8 @@
 "date"                      return 'DATE'
 "email"                     return 'EMAIL'
 "url"                       return 'URL'
+"ipv4"											return 'IPV4'
+"ipv6"											return 'IPV6'
 "ip address"                return 'IP_ADDRESS'
 "mac address"								return 'MAC_ADDRESS'
 "html tag"                  return 'HTML_TAG'

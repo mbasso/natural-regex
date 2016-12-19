@@ -2,11 +2,6 @@
 
 - Helpers
 	- UK postal code
-	- IPv4
-		current ip address
-	- IPv6
-	- ip address
-		change from current to (IPv4|IPv6)
 	- phone number
 	- address
 	- iban
@@ -36,6 +31,9 @@
 	- guid, uuid
 	- US ZIP Code
 	- Canadian postal code
+	- ipv4
+	- ipv6
+	- ip address
 
 ## WIKI
 

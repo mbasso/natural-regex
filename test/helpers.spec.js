@@ -161,14 +161,29 @@ describe('Helpers', () => {
       expect(htmlTag.test('<span foo="bar"')).toBeFalsy();
     });
 
-    it('ip address', () => {
-      const ipAddress = NaturalRegex.from('starts with ip address, end');
-      expect(
-        ipAddress.toString()
-        //eslint-disable-next-line
-      ).toEqual('/^(?:(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?))$/');
+    it('ipv4', () => {
+      const ipAddress = NaturalRegex.from('starts with ipv4, end');
       expect(ipAddress.test('73.60.124.136')).toBeTruthy();
       expect(ipAddress.test('255.255.255.255')).toBeTruthy();
+      expect(ipAddress.test('2001:db8:85a3:8d3:1319:8a2e:370:7348')).toBeFalsy();
+      expect(ipAddress.test('256.60.124.136')).toBeFalsy();
+    });
+
+    it('ipv6', () => {
+      const ipAddress = NaturalRegex.from('starts with ipv6, end');
+      expect(ipAddress.test('2001:db8:85a3:8d3:1319:8a2e:370:7348')).toBeTruthy();
+      expect(ipAddress.test('2001:db8:85a3::8a2e:370:7334')).toBeTruthy();
+      expect(ipAddress.test('2001:db8:85a3::8a2g:370:7334')).toBeFalsy();
+      expect(ipAddress.test('255.60.124.136')).toBeFalsy();
+    });
+
+    it('ip address', () => {
+      const ipAddress = NaturalRegex.from('starts with ip address, end');
+      expect(ipAddress.test('73.60.124.136')).toBeTruthy();
+      expect(ipAddress.test('255.255.255.255')).toBeTruthy();
+      expect(ipAddress.test('2001:db8:85a3:8d3:1319:8a2e:370:7348')).toBeTruthy();
+      expect(ipAddress.test('2001:db8:85a3::8a2e:370:7334')).toBeTruthy();
+      expect(ipAddress.test('2001:db8:85a3::8a2g:370:7334')).toBeFalsy();
       expect(ipAddress.test('256.60.124.136')).toBeFalsy();
       expect(ipAddress.test('http://foo/lorem')).toBeFalsy();
       expect(ipAddress.test('foo@bar.com')).toBeFalsy();
