@@ -1,8 +1,6 @@
 ## DEVELOPMENT
 
 - Helpers
-	- US ZIP Code
-	- Canadian postal code
 	- UK postal code
 	- IPv4
 		current ip address
@@ -36,6 +34,8 @@
 	- color name
 	- hostname
 	- guid, uuid
+	- US ZIP Code
+	- Canadian postal code
 
 ## WIKI
 

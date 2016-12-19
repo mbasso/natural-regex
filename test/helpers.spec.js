@@ -298,6 +298,21 @@ describe('Helpers', () => {
       expect(uuid.test('0000000-0000-0000-0000-000000000000')).toBeFalsy();
       expect(uuid.test('{0000000-0000-0000-0000-000000000000}')).toBeFalsy();
     });
+
+    it('us zip code', () => {
+      const code = NaturalRegex.from('start, us zip code, end');
+      expect(code.test('54365-2005')).toBeTruthy();
+      expect(code.test('54365')).toBeTruthy();
+      expect(code.test('54365-43')).toBeFalsy();
+      expect(code.test('5436-2005')).toBeFalsy();
+    });
+
+    it('canadian postal code', () => {
+      const code = NaturalRegex.from('start, canadian postal code, end');
+      expect(code.test('J8A0Y3')).toBeTruthy();
+      expect(code.test('J8A023')).toBeFalsy();
+      expect(code.test('JVA0Y3')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

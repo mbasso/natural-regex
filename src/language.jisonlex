@@ -97,6 +97,8 @@
 "color name"								return 'COLOR_NAME'
 "hostname"									return 'HOSTNAME'
 ([gu]uid)										return 'GUID'
+"us zip code"								return 'US_ZIP_CODE'
+"canadian postal code"			return 'CANADIAN_POSTAL_CODE'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'
