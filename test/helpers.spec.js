@@ -329,6 +329,17 @@ describe('Helpers', () => {
       expect(code.test('JVA0Y3')).toBeFalsy();
     });
 
+    it('uk postal code', () => {
+      const code = NaturalRegex.from('start, uk postal code, end');
+      expect(code.test('CW3 9SS')).toBeTruthy();
+      expect(code.test('SE5 0EG')).toBeTruthy();
+      expect(code.test('SE50EG')).toBeTruthy();
+      expect(code.test('WC2H 7LT')).toBeTruthy();
+      expect(code.test('aWC2H 7LT')).toBeFalsy();
+      expect(code.test('WC2H 7LTa')).toBeFalsy();
+      expect(code.test('WC2H')).toBeFalsy();
+    });
+
     it('bic', () => {
       const bic = NaturalRegex.from('start, bic, end');
       expect(bic.test('DABAIE2D')).toBeTruthy();

@@ -24,7 +24,6 @@
 "followed by"               return 'FOLLOWED_BY'
 "hex"                       return 'HEX'
 "ctrl+"                     return 'CONTROL_CHARACTER'
-"bic"												return 'BIC'
 
 "group"                     return 'GROUP'
 "end group"                 return 'END_GROUP'
@@ -102,6 +101,8 @@
 ([gu]uid)										return 'GUID'
 "us zip code"								return 'US_ZIP_CODE'
 "canadian postal code"			return 'CANADIAN_POSTAL_CODE'
+"uk postal code"						return 'UK_POSTAL_CODE'
+"bic"												return 'BIC'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'
