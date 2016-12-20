@@ -103,6 +103,7 @@
 "canadian postal code"			return 'CANADIAN_POSTAL_CODE'
 "uk postal code"						return 'UK_POSTAL_CODE'
 "bic"												return 'BIC'
+"iban"											return 'IBAN'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'

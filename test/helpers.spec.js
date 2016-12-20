@@ -346,6 +346,13 @@ describe('Helpers', () => {
       expect(bic.test('AAAAAAAAAAA')).toBeTruthy();
       expect(bic.test('DABAIED')).toBeFalsy();
     });
+
+    it('iban', () => {
+      const iban = NaturalRegex.from('start, iban, end');
+      expect(iban.test('GB29RBOS60161331926819')).toBeTruthy();
+      expect(iban.test('TR330006100519786457841326')).toBeTruthy();
+      expect(iban.test('R330006100519786457841326')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

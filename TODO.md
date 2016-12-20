@@ -1,10 +1,8 @@
 ## DEVELOPMENT
 
 - Helpers
-	- UK postal code
 	- phone number
 	- address
-	- iban
 	- ssn
 	- credit card
 	- Xml
@@ -31,10 +29,12 @@
 	- guid, uuid
 	- US ZIP Code
 	- Canadian postal code
+	- UK postal code
 	- ipv4
 	- ipv6
 	- ip address
 	- bic
+	- iban
 
 ## WIKI
 
