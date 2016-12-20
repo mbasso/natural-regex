@@ -24,6 +24,7 @@
 "followed by"               return 'FOLLOWED_BY'
 "hex"                       return 'HEX'
 "ctrl+"                     return 'CONTROL_CHARACTER'
+"bic"												return 'BIC'
 
 "group"                     return 'GROUP'
 "end group"                 return 'END_GROUP'

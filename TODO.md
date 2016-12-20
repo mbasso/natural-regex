@@ -34,6 +34,7 @@
 	- ipv4
 	- ipv6
 	- ip address
+	- bic
 
 ## WIKI
 

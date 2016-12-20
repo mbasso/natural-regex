@@ -284,6 +284,8 @@ helper
         { $$ = "[0-9]{5}(?:-[0-9]{4})?"; }
     | CANADIAN_POSTAL_CODE
         { $$ = "[ABCEGHJ-NPRSTVXY]{1}[0-9]{1}[ABCEGHJ-NPRSTV-Z]{1}[ ]?[0-9]{1}[ABCEGHJ-NPRSTV-Z]{1}[0-9]{1}"; }
+    | BIC
+        { $$ = "[a-zA-Z]{4}[a-zA-Z]{2}[a-zA-Z0-9]{2}(?:[a-zA-Z0-9]{3})?"; }
     ;
 
 datetime

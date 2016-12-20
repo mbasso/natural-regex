@@ -328,6 +328,13 @@ describe('Helpers', () => {
       expect(code.test('J8A023')).toBeFalsy();
       expect(code.test('JVA0Y3')).toBeFalsy();
     });
+
+    it('bic', () => {
+      const bic = NaturalRegex.from('start, bic, end');
+      expect(bic.test('DABAIE2D')).toBeTruthy();
+      expect(bic.test('AAAAAAAAAAA')).toBeTruthy();
+      expect(bic.test('DABAIED')).toBeFalsy();
+    });
   });
 
   describe('date', () => {
