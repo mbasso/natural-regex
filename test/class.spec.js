@@ -35,5 +35,12 @@ describe('Class', () => {
       replace: '/2016',
     });
     expect(newString).toEqual('08/12/2016');
+    newString = NaturalRegex.replace({
+      string: 'foo foo',
+      match: 'F',
+      replace: 'fo',
+      flags: 'i',
+    });
+    expect(newString).toEqual('fooo foo');
   });
 });

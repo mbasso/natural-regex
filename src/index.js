@@ -10,9 +10,10 @@ export default class NaturalRegex {
     string = '',
     match = '',
     replace = '',
+    flags,
   } = {}) => (
     string.replace(
-      new RegExp(NaturalRegex.parse(match), 'g'),
+      new RegExp(NaturalRegex.parse(match), flags || 'g'),
       replace
     )
   )
