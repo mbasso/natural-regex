@@ -1,5 +1,12 @@
 ## DEVELOPMENT
 
+- Class
+	- accept object as flags Eg. {
+			caseInsensitive: true,
+			global: false,
+			...
+		}
+
 - Helpers
 	- phone number
 	- address
