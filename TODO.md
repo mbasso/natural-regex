@@ -11,6 +11,9 @@
 
 ## DOCUMENTATION
 
+- Class
+	- replace flags parameter
+
 - Operands
 	- range
 
