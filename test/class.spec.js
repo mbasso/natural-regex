@@ -3,7 +3,14 @@ import NaturalRegex from '../src/';
 
 describe('Class', () => {
   it('should create', () => {
-    const regexp = NaturalRegex.from('alphanumeric');
+    let regexp = NaturalRegex.from('alphanumeric', {
+      global: true,
+      ignoreCase: true,
+      sticky: false,
+    });
+    expect(regexp).toBeA(RegExp);
+    expect(regexp.toString()).toEqual('/\\w/gi');
+    regexp = NaturalRegex.from('alphanumeric');
     expect(regexp).toBeA(RegExp);
     expect(regexp.toString()).toEqual('/\\w/');
   });
