@@ -1,12 +1,5 @@
 ## DEVELOPMENT
 
-- Class
-	- accept object as flags Eg. {
-			caseInsensitive: true,
-			global: false,
-			...
-		}
-
 - Helpers
 	- phone number
 	- address
@@ -19,7 +12,8 @@
 ## DOCUMENTATION
 
 - Class
-	- replace flags parameter
+	- flags parameter in NaturalRegex.replace
+	- flags parameter as object or string
 
 - Operands
 	- range
