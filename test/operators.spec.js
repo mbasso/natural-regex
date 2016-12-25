@@ -137,17 +137,17 @@ describe('Operators', () => {
         NaturalRegex.from('capture from a to z end capture').toString()
       ).toEqual('/([a-z])/');
     });
+
+    it('followed by', () => {
+      expect(
+        NaturalRegex.from('alphanumeric followed by digit').toString()
+      ).toEqual('/\\w(?=\\d)/');
+    });
+
+    it('not followed by', () => {
+      expect(
+        NaturalRegex.from('alphanumeric not followed by digit').toString()
+      ).toEqual('/\\w(?!\\d)/');
+    });
   });
 });
-
-/* it('followed by', () => {
-  expect(
-    NaturalRegex.from('alphanumeric followed by digit').toString()
-  ).toEqual('/\\w(?=\\d)/');
-});
-
-it('not followed by', () => {
-  expect(
-    NaturalRegex.from('alphanumeric not followed by digit').toString()
-  ).toEqual('/\\w(?!\\d)/');
-}); */

@@ -15,13 +15,8 @@
 	- flags parameter in NaturalRegex.replace
 	- flags parameter as object or string
 
-- Operands
-	- range
-
 - Operators
 	- capture ... end capture
-	- followed by
-	- not followed by
 	- (smallest)
 
 ## WIKI
