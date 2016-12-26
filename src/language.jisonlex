@@ -23,6 +23,7 @@
 "not followed by"           return 'NOT_FOLLOWED_BY'
 "followed by"               return 'FOLLOWED_BY'
 "hex"                       return 'HEX'
+"unicode"                   return 'UNICODE'
 "ctrl+"                     return 'CONTROL_CHARACTER'
 
 "group"                     return 'GROUP'

@@ -60,6 +60,7 @@ e
         }
     | separatorcharacter
     | hexcharacter
+    | unicodecharacter
     | specialcharacter
     | word
     | helper
@@ -209,6 +210,13 @@ hexcharacter
         { $$ = "\\x" + $2 + $3; }
     | HEX hexvalue hexvalue hexvalue hexvalue
         { $$ = "\\u" + $2 + $3 + $4 + $5; }
+    ;
+
+unicodecharacter
+    : UNICODE hexvalue hexvalue hexvalue hexvalue
+        { $$ = "\\u" + $2 + $3 + $4 + $5; }
+    | UNICODE hexvalue hexvalue hexvalue hexvalue hexvalue
+        { $$ = "\\u" + $2 + $3 + $4 + $5 + $6; }
     ;
 
 hexvalue

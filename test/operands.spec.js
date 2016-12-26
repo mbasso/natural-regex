@@ -380,6 +380,18 @@ describe('Operands', () => {
     ).toThrow();
   });
 
+  it('unicode', () => {
+    expect(
+      NaturalRegex.from('unicode abcd').toString()
+    ).toEqual('/\\uabcd/');
+    expect(
+      NaturalRegex.from('unicode 43abc').toString()
+    ).toEqual('/\\u43abc/');
+    expect(
+      () => NaturalRegex.from('unicode 4x3bc')
+    ).toThrow();
+  });
+
   it('ctrl+', () => {
     expect(
       NaturalRegex.from('ctrl+A').toString()
