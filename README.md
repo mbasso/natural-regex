@@ -3,7 +3,6 @@
 [![Build Status](https://travis-ci.org/mbasso/natural-regex.svg?branch=master)](https://travis-ci.org/mbasso/natural-regex)
 [![npm version](https://img.shields.io/npm/v/natural-regex.svg)](https://www.npmjs.com/package/natural-regex)
 [![npm downloads](https://img.shields.io/npm/dm/natural-regex.svg?maxAge=2592000)](https://www.npmjs.com/package/natural-regex)
-[![Coverage Status](https://coveralls.io/repos/github/mbasso/natural-regex/badge.svg?branch=master)](https://coveralls.io/github/mbasso/natural-regex?branch=master)
 [![Join the chat at https://gitter.im/mbasso/natural-regex](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/mbasso/natural-regex?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 > Create regex from natural language
