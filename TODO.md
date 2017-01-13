@@ -13,6 +13,4 @@
 
 ## EXAMPLES
 
-- Integrate natural-regex with normal regex
-- Concatenate natural-regex
 - Find other examples
