@@ -104,7 +104,7 @@
 (us\s(zip|postal)\scode)		return 'US_ZIP_CODE'
 (canadian\s(zip|postal)\scode) return 'CANADIAN_POSTAL_CODE'
 (brazilian\s(zip|postal)\scode) return 'BRAZILIAN_POSTAL_CODE'
-"uk postal code"						return 'UK_POSTAL_CODE'
+(uk\s(zip|postal)\scode)		return 'UK_POSTAL_CODE'
 "bic"												return 'BIC'
 "iban"											return 'IBAN'
 "brainfuck code"						return 'BRAINFUCK'
