@@ -109,6 +109,8 @@
 "iban"											return 'IBAN'
 "brainfuck code"						return 'BRAINFUCK'
 "morse code"								return 'MORSE'
+"youtube channel"						return 'YOUTUBE_CHANNEL'
+"youtube video"							return 'YOUTUBE_VIDEO'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'

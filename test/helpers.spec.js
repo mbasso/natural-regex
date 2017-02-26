@@ -381,6 +381,18 @@ describe('Helpers', () => {
       expect(morse.test('..-. --- ---')).toBeTruthy();
       expect(morse.test('..-. --- --- == foo')).toBeFalsy();
     });
+
+    it('youtube channel', () => {
+      const morse = NaturalRegex.from('start, youtube channel, end');
+      expect(morse.test('https://www.youtube.com/channel/UCY41lZvsCbPNKVfuTA2HsnA')).toBeTruthy();
+      expect(morse.test('http://www.youtube.com/channl/foo')).toBeFalsy();
+    });
+
+    it('youtube video', () => {
+      const morse = NaturalRegex.from('start, youtube video, end');
+      expect(morse.test('https://youtu.be/TZeCUEZKoyk')).toBeTruthy();
+      expect(morse.test('https://youtu.be/TZeCUEZKo')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

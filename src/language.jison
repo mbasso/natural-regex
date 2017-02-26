@@ -306,6 +306,10 @@ helper
         { $$ = "[+-<>.,\\[\\] \\t\\n\\r]+"; }
     | MORSE
         { $$ = "[.-]{1,5}(?:[ \\t]+[.-]{1,5})*(?:[ \\t]+[.-]{1,5}(?:[ \\t]+[.-]{1,5})*)*"; }
+    | YOUTUBE_CHANNEL
+        { $$ = "https?:\\/\\/(?:www\\.)?youtube\\.com\\/channel\\/UC(?:[-_a-zA-Z0-9]{22})"; }
+    | YOUTUBE_VIDEO
+        { $$ = "https?:\\/\\/(?:youtu\\.be\\/|(?:[a-z]{2,3}\\.)?youtube\\.com\\/watch(?:\\?|#\\!)v=)(?:[\\w-]{11}).*"; }
     ;
 
 datetime
