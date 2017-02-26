@@ -362,6 +362,18 @@ describe('Helpers', () => {
       expect(iban.test('TR330006100519786457841326')).toBeTruthy();
       expect(iban.test('R330006100519786457841326')).toBeFalsy();
     });
+
+    it('brainfuck code', () => {
+      const brainfuck = NaturalRegex.from('start, brainfuck code, end');
+      expect(brainfuck.test(',>,,>++++++++[<------<------>>-]')).toBeTruthy();
+      expect(brainfuck.test('do while')).toBeFalsy();
+    });
+
+    it('morse code', () => {
+      const morse = NaturalRegex.from('start, morse code, end');
+      expect(morse.test('..-. --- ---')).toBeTruthy();
+      expect(morse.test('..-. --- --- == foo')).toBeFalsy();
+    });
   });
 
   describe('date', () => {

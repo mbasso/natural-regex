@@ -106,6 +106,8 @@
 "uk postal code"						return 'UK_POSTAL_CODE'
 "bic"												return 'BIC'
 "iban"											return 'IBAN'
+"brainfuck code"						return 'BRAINFUCK'
+"morse code"								return 'MORSE'
 
 (hh|hours)                  return 'HOURS'
 (mm|minutes)                return 'MINUTES'
