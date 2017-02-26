@@ -338,6 +338,13 @@ describe('Helpers', () => {
       expect(code.test('JVA0Y3')).toBeFalsy();
     });
 
+    it('brazilian postal code', () => {
+      const code = NaturalRegex.from('start, brazilian postal code, end');
+      expect(code.test('00000-000')).toBeTruthy();
+      expect(code.test('J8A023')).toBeFalsy();
+      expect(code.test('JVA0Y3')).toBeFalsy();
+    });
+
     it('uk postal code', () => {
       const code = NaturalRegex.from('start, uk postal code, end');
       expect(code.test('CW3 9SS')).toBeTruthy();
